@@ -16,7 +16,26 @@ class App extends Component {
 
         // this.props.a()
     }
+  /*  static getDerivedStateFromProps(nextProps, prevState) {
+        console.log(nextProps,'123')
+        console.log(prevState,'456')
+        return {
+            Name:'第一个更改',
+        };
+        /!*  if (nextProps.translateX !== prevState.translateX) {
+              return {
+                  translateX: nextProps.translateX,
+              };
+          }*!/
 
+    }
+    componentDidUpdate(prevProps, prevState) {
+        console.log(prevProps,'789')
+        console.log(prevState,'000')
+        /!*    if (!prevState.isLogin && this.props.isLogin) {
+                this.handleClose();
+            }*!/
+    }*/
     render() {
         console.log(this.props)
         return (
