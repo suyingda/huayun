@@ -1,10 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack')
+
+const baseHref = '/';
+
+console.log(process.env.WP_BASE_HREF, '123')
 module.exports = {
-    entry:{
-        app:[
+    entry: {
+        app: [
             './src/index.js'
         ],
         // vendor: ['react'] //提取react模块作为公共的js文件
@@ -18,19 +23,6 @@ module.exports = {
 
     },
     plugins: [
-      /*  new webpack.optimize.UglifyJsPlugin({
-            output: {
-                comments: false,
-            },
-            compress: {
-                warnings: false
-            }
-        }),*//*        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-            },
-        }),*/
-
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'public/index.html',
@@ -41,7 +33,15 @@ module.exports = {
             },
         }), //创建html打包后
         new CleanWebpackPlugin(['dist']),// delete dist,
-
+        /*  new webpack.DefinePlugin({
+              'process.env': {
+                  BABEL_ENV: JSON.stringify(true)
+              }
+          }),*/
+        /*  new webpack.DefinePlugin({
+              'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+          }),*/
+        new BaseHrefWebpackPlugin({baseHref: baseHref})
     ],
 
     module: {
@@ -54,8 +54,8 @@ module.exports = {
                 test: /\.js$/,
                 use: [
                     {
-                        loader: 'babel-loader',
-
+                        // loader: 'babel-loader',
+                        loader: "babel-loader?cacheDirectory=true", // 使用cache提升编译速度
                         /*  options: {
                           presets: ["react", "env"],
                           plugins: ["transform-object-rest-spread"] // ...展开符号插件安装
@@ -78,15 +78,6 @@ module.exports = {
         //服务器打包后输出的路径。
         publicPath: '/',
         historyApiFallback: true,
-      /*  proxy: {
-            '/': {
-                target: 'http://localhost:5566/',
-            }
-        }*/
-        /*  historyApiFallback: {
-              index: '/',
-
-          }*/
 
     },
 };

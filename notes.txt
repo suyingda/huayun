@@ -1,0 +1,50 @@
+http://172.253.32.91/ibp-designer/
+
+/project/releateEmpService/queryPreDueReportInfo
+
+http://172.253.40.237:20083/#/home/project/api/
+
+
+
+
+
+
+http://172.253.32.91:7009/devops/quicklogin/list?baseUrl=http://127.0.0.1:3000/ibp
+
+
+
+http://172.254.162.7:8081/
+http://172.253.32.131:9589/ibp  test
+
+
+
+component: MajorFinancialInformation, 复制 #952  IPO初步尽职调查报告 财务会计信息   IPOIsExpectedToExplainThePlan
+
+http://code.cmschina.com.cn/
+
+
+collection
+
+http://www.cnblogs.com/gdsblog/p/8025092.html#4032097
+
+
+http://172.253.32.91:7009/devops/Login.php#
+
+git config --global https.proxy http://127.0.0.1:1080
+npm config delete proxy
+npm config set proxy http://server:port
+git
+https://www.cnblogs.com/jackyshan/p/5985590.html
+https://www.jianshu.com/p/58a166f24c81
+ https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000
+https://segmentfault.com/q/1010000008276375
+webpack
+https://segmentfault.com/a/1190000007949841?_ea=1506662
+https://github.com/baizn/react-router-domand-loading server.js
+https://www.cnblogs.com/YZH-chengdu/p/6855237.html server.js
+https://segmentfault.com/q/1010000012366028 server.js
+https://cnodejs.org/topic/59ee9bbe9cf198a85bd2e210 server.js
+http://cw.hubwiz.com/card/c/5708a1995fd193d76fcc7147/1/3/5/ server.js
+
+如果你是在本地 merge 的，那你可以通过 git reflog 查看你的历史操作，然后通过 git reset --hard HEAD@{n} 回退到 reflog 里面的第 n 步
+然后，git push origin master -f 就可以把远程的 master 退回到之前的状态了
