@@ -1,6 +1,6 @@
 function all(data = []
 , action) {
-    console.log(action,'pub')
+    // console.log(action,'pub')
     switch (action.type) {
         case "add":
             return [

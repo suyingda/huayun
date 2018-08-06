@@ -7,6 +7,7 @@ var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 let webpackHotMiddleWare = require('webpack-hot-middleware');
 const compiler = webpack(WebpackConfig)
+
 const instance = webpackDevMiddleware(compiler);
 
 
@@ -14,6 +15,7 @@ var fs = require('fs')
 var path = require('path')
 // app.use(instance);
 
+/*
 setTimeout(() => {
     // After a short delay the configuration is changed and a banner plugin is added
     // to the config
@@ -22,6 +24,7 @@ setTimeout(() => {
     instance.invalidate();
 },1000);
 
+*/
 
 import React from 'react';
 import ReactDOM from "react-dom";
@@ -59,9 +62,10 @@ const html = (_html) => (
         </html>`
 )
 app.get("*", (req, res) => {
- /* console.log(req,'打印req')*/
+
     const context = {};
     const _html = renderToString(
+
         <StaticRouter location={req.url} context={context}>
             <Provider store={store}>
                 <div>
@@ -91,12 +95,10 @@ app.get("*", (req, res) => {
 
 
 app.use(webpackDevMiddleware(webpack(WebpackConfig), {
-
     publicPath: WebpackConfig.output.publicPath,
     // port: 8000,
     progress: true,
     inline: true,
-    open:9000,
     stats: {
             colors: true,
             chunks: false
@@ -104,10 +106,8 @@ app.use(webpackDevMiddleware(webpack(WebpackConfig), {
     hot: true,
     // serverSideRender: true
 }))
-app.use(webpackHotMiddleWare(webpack(WebpackConfig)));
-
-
-
+// app.use(webpackHotMiddleWare(webpack(WebpackConfig)));
+app.use(webpackHotMiddleWare(compiler));
 // catch 404 and forward to error handler
 /*app.use(function (req, res, next) {
     //判断是主动导向404页面，还是传来的前端路由。

@@ -12,10 +12,11 @@ module.exports = {
         app: [
             // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
             // 'webpack-hot-middleware/client?reload=true',
+            'webpack-hot-middleware/client',
             './src/index.js'
         ],
         // vendor: ['react'] //提取react模块作为公共的js文件
-},
+    },
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -44,12 +45,8 @@ module.exports = {
               'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
           }),*/
         new BaseHrefWebpackPlugin({baseHref: baseHref}),
-        // new webpack.optimize.OccurenceOrderPlugin(),
- /*       new webpack.HotModuleReplacementPlugin(),
-        // Use NoErrorsPlugin for webpack 1.x
-        new webpack.NoEmitOnErrorsPlugin()*/
         new webpack.HotModuleReplacementPlugin(),
-        // new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ],
 
     module: {

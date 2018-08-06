@@ -45,12 +45,11 @@ export const routes = [
         children: [
             {
                 path: "/Footer",
-                component: Footer,
+                component:()=>(<div><Link to='/left/Footer/test'>123</Link></div>),
                 children: [
                     {
                         path: "/test",
-
-                        component: test
+                        component: Footer
                     }
                 ]
             },

@@ -20,6 +20,7 @@
     "S": "webpack-dev-server --mode development",
     "Sbuild": "webpack --mode production",
     "n": "node  ./node_modules/babel-cli/bin/babel-node   server.js",
+    "nn": "node  ./node_modules/babel-cli/bin/babel-node   sea.js",
     "ser": "node  --experimental-modules ser.js"
   },
   "devDependencies": {

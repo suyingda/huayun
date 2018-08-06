@@ -21,23 +21,22 @@ class Left extends Component {
         this.props.history.push(path);
       }
   render() {
-   console.log('left')
 
     return (
       <div>
         <div
           style={{
             width: "200px",
-            height: "1000px",
+            height: "500px",
             border: "1px",
-            background: "red",
+            background: "white",
             float: "left"
           }}
         >
           <h4>left</h4>
           <ul>
             <li>
-              <Link to={this.state.matchPath+'/Footer'} >12321321321</Link>
+              <Link to={this.state.matchPath+'/Footer'} >11111</Link>
             </li>
             <li onClick={this.add.bind(this)}>Cart
               {/*<Link to={path}>Cart{path}</Link>*/}
