@@ -9,10 +9,12 @@ const baseHref = '/';
 /*console.log(process.env.WP_BASE_HREF, '123')*/
 module.exports = {
     entry: {
-        app:[
-            　　'webpack-hot-middleware/client',
-            　　'./src/index.js'
-            　　],
+        app: [
+            // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
+            // 'webpack-hot-middleware/client?reload=true',
+            'webpack-hot-middleware/client',
+            './src/index.js'
+        ],
         // vendor: ['react'] //提取react模块作为公共的js文件
     },
     output: {
@@ -85,17 +87,3 @@ module.exports = {
         // inline: true, // 文件改变自动刷新页面
     },
 };
-module.exports = function(app){
-    let webpackconfig = Object.assign({}, baseConfig, devOption);// console.log(webpackconfig);
-    
-    var compiler = webpack(webpackconfig);// console.log(compiler);
-    app.use(devMiddleWare(compiler,{
-    publicPath: webpackconfig.output.publicPath,
-    stats: {
-    colors: true,
-    chunks: false
-    }
-    }));
-    app.use(hotMiddleWare(compiler));
-    return app;
-    }
