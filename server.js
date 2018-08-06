@@ -1,37 +1,119 @@
-// import React from 'react';
-/*eslint-disable no-console, no-var */
+var WebpackConfig = require('./webpack.config')
+
 var express = require('express')
+var app = express();
 var rewrite = require('express-urlrewrite')
 var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
-var WebpackConfig = require('./webpack.config')
+let webpackHotMiddleWare = require('webpack-hot-middleware');
+const compiler = webpack(WebpackConfig)
+const instance = webpackDevMiddleware(compiler);
 
-import React from 'react';
-import {routes}  from './src/router/index.js'
 
-setTimeout(()=>{
-    console.log(routes,'123')
-},4000)
-
-var app = express();
-
-// console.log(RouterModule, 'i am  route')
-
-app.use(webpackDevMiddleware(webpack(WebpackConfig), {
-    publicPath: '/',
-    // historyApiFallback: true,
-    stats: {
-        colors: true
-    }
-}))
 var fs = require('fs')
 var path = require('path')
+// app.use(instance);
+
+setTimeout(() => {
+    // After a short delay the configuration is changed and a banner plugin is added
+    // to the config
+    compiler.apply(new webpack.BannerPlugin('A new banner'));
+    // Recompile the bundle with the banner plugin:
+    instance.invalidate();
+},1000);
+
+
+import React from 'react';
+import ReactDOM from "react-dom";
+import {RouteWithSubRoutes, routes, RouteConfigExample} from './src/router/index.js'
+import {renderToString} from 'react-dom/server'
+import {match, RouterContext, StaticRouter, Link, BrowserRouter, Route, Switch} from 'react-router-dom';
+import App from './src/App.js'
+
+import {createStore, applyMiddleware} from "redux";
+import thunk from 'redux-thunk';
+import {Provider} from "react-redux";
+import reducers from "./src/module/reducers";
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
+
+const html = (_html) => (
+    ` <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                    <meta name="theme-color" content="#000000">     
+                        <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+                            <!--<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">-->
+                                <title>React App</title>
+                                 <!--<script src="/dist/bundle.js"></script>-->
+        </head>
+        <body>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        <div id="root">${_html}</div>
+        </body>
+        </html>`
+)
+app.get("*", (req, res) => {
+ /* console.log(req,'打印req')*/
+    const context = {};
+    const _html = renderToString(
+        <StaticRouter location={req.url} context={context}>
+            <Provider store={store}>
+                <div>
+                    {/*<Route path="/" exact render={( props ) => ( <div>Helloworld</div> )} />*/}
+                    {routes.map((route, i) => <RouteWithSubRoutes key={i} excat={route.excat}   {...route} />)}
+                </div>
+            </Provider>
+        </StaticRouter>
+    );
+
+/*    fs.readFile(__dirname+'/public/index.html', function (err, data) {
+        if (err) {
+            // console.log(err, data);
+            res.send('后台错误');
+        } else {
+            console.log(data);
+            res.writeHead(200, {
+                'Content-type': 'text/html',
+                'Connection': 'keep-alive'
+            });
+            res.end(html(_html));
+        }
+    })*/
+    res.status(200).send(html(_html));
+
+});
+
+
+app.use(webpackDevMiddleware(webpack(WebpackConfig), {
+
+    publicPath: WebpackConfig.output.publicPath,
+    // port: 8000,
+    progress: true,
+    inline: true,
+    open:9000,
+    stats: {
+            colors: true,
+            chunks: false
+    },
+    hot: true,
+    // serverSideRender: true
+}))
+app.use(webpackHotMiddleWare(webpack(WebpackConfig)));
+
+
+
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+/*app.use(function (req, res, next) {
     //判断是主动导向404页面，还是传来的前端路由。
     //如果是前端路由则如下处理
-/*    console.log(res, '我是res')
-    console.log(req._parsedUrl.pathname, '13132132132132131323')*/
+/!*    console.log(res, '我是res')
+    console.log(req._parsedUrl.pathname, '13132132132132131323')*!/
 
     fs.readFile(__dirname + '/dist/index.html', function (err, data) {
         if (err) {
@@ -46,123 +128,13 @@ app.use(function (req, res, next) {
             res.end(data);
         }
     })
-});
+});*/
 
 
-app.get('*', async (request, response) => {
-    // 若不需要服务端渲染，直接返回页面内容
-
-    let markup;
-    let title;
-    let store;
-    let preloadState;
-
-    let start;
-    let firstStart;
-    let cost;
-
-    const requestPath = request.url;
-
-    try {
-        const routeConfig = require('./src/router/index.js');
-        const { defualt:routes, RouteWithSubRoutes} = routeConfig;
+// app.use(express.static(__dirname))
 
 
-
-
-        // ------------ 开始 -------------
-
-        // 创建redux.store
-        const configureStore = require('../app/store/configureStore');
-        store = configureStore();
-        const {dispatch} = store;
-        const actions = bindActionCreators(actionCreators, dispatch);
-        // 设置API远程地址基本信息
-        const protocol = request.protocol;
-        const host = apiHost.replace(protocol + '://', '');
-        actions.storeHostInfo({protocol, host});
-
-
-        // Match Route Configs
-        const matchResults = RouteWithSubRoutes(requestPath);
-        if (!matchResults || matchResults.length == 0) {
-            justSendHtml(response);
-            return;
-        }
-        const firstMatchResult = matchResults[0];
-        const { match:topRouteMatch, route:topRoute } = firstMatchResult;
-        const { component:Component, title:routeTitle } = topRoute;
-        const { getPageTitle=()=>{} } = Component;
-
-
-
-        // Preceding Process
-        const redirect = {};
-        const cookie = { get: (name) => request.cookies[name] };
-        const replace = (url) => { redirect.url = url; };
-
-
-
-        // Redirect
-        if (redirect.url) {
-            response.redirect(302, redirect.url);
-            return;
-        }
-
-        // Fetch Document title
-        // Join all Routes's Titles from Match Results
-
-
-
-        // Call Preload Functions
-        const preloadPromises = [];
-        matchResults
-            .filter(r => typeof r.route.component.preload === 'function')
-            .forEach(r => {
-                // Each route component has its own 'match' argument
-                // const p = r.route.component.preload({ ...actions, match:r.match });
-                // preloadPromises.push(p);
-            });
-        // Set preload from server flag
-        if (preloadPromises.length > 0) {
-            actions.preloadFromServer();
-        }
-        // Must set await in server side
-        await Promise.all(preloadPromises);
-
-
-
-        // Server render
-        const context = {};
-        const { children, ...topRouteRestProps } = topRoute;
-        markup = renderToString(
-            <Provider store={store}>
-                <Router location={requestPath} context={context}>
-                    <Route exact { ...topRouteRestProps } />
-                </Router>
-            </Provider>
-        );
-
-
-    } catch (e) {
-        title = `发生错误`;
-        markup = `<div style="padding:30px;color:red;" server>error: ${e.stack}</div>`;
-        console.log(e);
-    } finally {
-        // 拿到预加载后的状态树
-        if (store) {
-            try {
-                preloadState = JSON.stringify(store.getState());
-            } catch(e2) {/*ignore*/}
-        }
-
-
-        response.header("Content-Type", "text/html;charset=UTF-8");
-        response.send(html({title, markup, preloadState}));
-    }
-});
-app.use(express.static(__dirname))
-
-app.listen(9000, function () {
-    console.log('Server listening on http://localhost:9000, Ctrl+C to stop')
+var PORT = process.env.PORT || 9000
+app.listen(PORT, function () {
+    console.log('Server listening on http://localhost:9000---start, Ctrl+C to stop')
 })

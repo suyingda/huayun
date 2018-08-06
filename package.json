@@ -19,8 +19,8 @@
     "eject": "react-scripts eject",
     "S": "webpack-dev-server --mode development",
     "Sbuild": "webpack --mode production",
-    "n":"node  ./node_modules/babel-cli/bin/babel-node  server.js",
-    "ser":"node  --experimental-modules ser.js"
+    "n": "node  ./node_modules/babel-cli/bin/babel-node   server.js",
+    "ser": "node  --experimental-modules ser.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -35,6 +35,8 @@
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-hot-middleware": "^2.22.3"
   }
 }

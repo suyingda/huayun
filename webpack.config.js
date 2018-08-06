@@ -6,14 +6,16 @@ const webpack = require('webpack')
 
 const baseHref = '/';
 
-console.log(process.env.WP_BASE_HREF, '123')
+/*console.log(process.env.WP_BASE_HREF, '123')*/
 module.exports = {
     entry: {
         app: [
+            // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
+            // 'webpack-hot-middleware/client?reload=true',
             './src/index.js'
         ],
         // vendor: ['react'] //提取react模块作为公共的js文件
-    },
+},
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -32,7 +34,7 @@ module.exports = {
                 collapseWhitespace: true  //删除空白符与换行符
             },
         }), //创建html打包后
-        new CleanWebpackPlugin(['dist']),// delete dist,
+        // new CleanWebpackPlugin(['dist']),// delete dist,
         /*  new webpack.DefinePlugin({
               'process.env': {
                   BABEL_ENV: JSON.stringify(true)
@@ -41,7 +43,13 @@ module.exports = {
         /*  new webpack.DefinePlugin({
               'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
           }),*/
-        new BaseHrefWebpackPlugin({baseHref: baseHref})
+        new BaseHrefWebpackPlugin({baseHref: baseHref}),
+        // new webpack.optimize.OccurenceOrderPlugin(),
+ /*       new webpack.HotModuleReplacementPlugin(),
+        // Use NoErrorsPlugin for webpack 1.x
+        new webpack.NoEmitOnErrorsPlugin()*/
+        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.NoErrorsPlugin()
     ],
 
     module: {
@@ -69,7 +77,7 @@ module.exports = {
         ]
     },
     devServer: {
-        // contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, "dist"),
         // compress: true,
         open: false,
         port: 9000,
@@ -78,6 +86,7 @@ module.exports = {
         //服务器打包后输出的路径。
         publicPath: '/',
         historyApiFallback: true,
-
+        // mode     : 'development',//设置环境依赖  4.0报错,
+        // inline: true, // 文件改变自动刷新页面
     },
 };

@@ -21,6 +21,7 @@ class Left extends Component {
         this.props.history.push(path);
       }
   render() {
+   console.log('left')
 
     return (
       <div>
@@ -36,7 +37,7 @@ class Left extends Component {
           <h4>left</h4>
           <ul>
             <li>
-              <Link to={this.state.matchPath+'/Footer'} >Footer</Link>
+              <Link to={this.state.matchPath+'/Footer'} >12321321321</Link>
             </li>
             <li onClick={this.add.bind(this)}>Cart
               {/*<Link to={path}>Cart{path}</Link>*/}
