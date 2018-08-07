@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98a459ee-b2b8-4b8b-a874-b89dfa550e07" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/sea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rt/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rt/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module/pub.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/module/pub.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/left.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/left.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-    </list>
+    <list default="true" id="98a459ee-b2b8-4b8b-a874-b89dfa550e07" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -232,7 +220,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="408" />
     <option name="y" value="117" />
     <option name="width" value="1400" />
@@ -351,12 +339,12 @@
       <workItem from="1533201959338" duration="9273000" />
       <workItem from="1533268369048" duration="38360000" />
       <workItem from="1533515137007" duration="27093000" />
-      <workItem from="1533551299021" duration="6979000" />
+      <workItem from="1533551299021" duration="7148000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137152000" />
+    <option name="totallyTimeSpent" value="137321000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
