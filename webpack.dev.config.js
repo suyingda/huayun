@@ -25,6 +25,9 @@ let devOption = {
   ]
 };
 
+
+
+
 module.exports = function(app) {
   let webpackconfig = Object.assign({}, baseConfig, devOption); // console.log(webpackconfig);
 

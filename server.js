@@ -25,7 +25,7 @@ setTimeout(() => {
 },1000);
 
 */
-
+import Home from './src/home'
 import React from 'react';
 import ReactDOM from "react-dom";
 import {RouteWithSubRoutes, routes, RouteConfigExample} from './src/router/index.js'
@@ -62,14 +62,12 @@ const html = (_html) => (
         </html>`
 )
 app.get("*", (req, res) => {
-
     const context = {};
     const _html = renderToString(
-
         <StaticRouter location={req.url} context={context}>
             <Provider store={store}>
                 <div>
-                    {/*<Route path="/" exact render={( props ) => ( <div>Helloworld</div> )} />*/}
+                    <Home/>
                     {routes.map((route, i) => <RouteWithSubRoutes key={i} excat={route.excat}   {...route} />)}
                 </div>
             </Provider>

@@ -17,7 +17,7 @@ export default class Home extends React.Component {
       <div>
           <h1>home</h1>
         <nav>
-          {/*<Link to="/">home-所有列表</Link>*/}
+          <Link to="/left">left-所有列表</Link>
           {/*<br />*/}
               {/*<Link to="/Like">home-收藏列表</Link>*/}
         </nav>

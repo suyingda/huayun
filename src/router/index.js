@@ -28,7 +28,7 @@ export const routes = [
     {
         path:'/',
         exact:true,
-        component:()=>(<div>index</div>)
+        component: home,
     },
     {
         path: "/f1",
@@ -45,11 +45,11 @@ export const routes = [
         children: [
             {
                 path: "/Footer",
-                component:()=>(<div><Link to='/left/Footer/test'>123</Link></div>),
+                component:Footer,
                 children: [
                     {
                         path: "/test",
-                        component: Footer
+                        component: f1
                     }
                 ]
             },
@@ -68,7 +68,6 @@ export const routes = [
     }
 ].concat(
     [{
-
         path:'*',
         component: Not,
     }])
@@ -80,12 +79,7 @@ export const RouteWithSubRoutes = route => (
                 <Route
                     path={route.matchpath!=undefined?route.matchpath+route.path:route.path}
                     exact={route.exact}
-                    render={props => {
-                        // console.log(props.match.isExact,'123')
-                        return (
-                            <route.component {...props} routes={route.children}/>
-                        )
-                    }}
+                    render={props =>  <route.component {...props} routes={route.children}/> }
                 />
             </div>
         );

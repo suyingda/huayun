@@ -36,7 +36,7 @@ class Left extends Component {
           <h4>left</h4>
           <ul>
             <li>
-              <Link to={this.state.matchPath+'/Footer'} >123我现在是开启了热更新了吗</Link>
+              <Link to={this.state.matchPath+'/Footer'} >开启112323 </Link>
             </li>
             <li onClick={this.add.bind(this)}>Cart
               {/*<Link to={path}>Cart{path}</Link>*/}
