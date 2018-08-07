@@ -52,5 +52,7 @@ http://react-china.org/t/react-js/10144教你如何搭建一个超完美的React
 https://www.cnblogs.com/developerdaily/p/6806217.html  搭建的服务端渲染
 https://www.cnblogs.com/developerdaily/p/6806217.html
 
+https://www.cnblogs.com/dreamless/p/6008362.html 4.0 貌似可以成功
+
 如果你是在本地 merge 的，那你可以通过 git reflog 查看你的历史操作，然后通过 git reset --hard HEAD@{n} 回退到 reflog 里面的第 n 步
 然后，git push origin master -f 就可以把远程的 master 退回到之前的状态了
