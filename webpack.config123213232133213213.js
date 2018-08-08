@@ -8,8 +8,6 @@ const webpack = require('webpack')
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 /*console.log(process.env.WP_BASE_HREF, '123')*/
 module.exports = env => {
-/*    console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
-    console.log('Production: ', env.production); // true*/
     const baseHref = env.NODE_ENV == 'local' ? '/' : './';
     return {
         entry: {

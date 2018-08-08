@@ -40,11 +40,11 @@ https://www.jianshu.com/p/58a166f24c81
 https://segmentfault.com/q/1010000008276375
 webpack
 https://segmentfault.com/a/1190000007949841?_ea=1506662
-https://github.com/baizn/react-router-domand-loading server.js
-https://www.cnblogs.com/YZH-chengdu/p/6855237.html server.js
-https://segmentfault.com/q/1010000012366028 server.js
-https://cnodejs.org/topic/59ee9bbe9cf198a85bd2e210 server.js
-http://cw.hubwiz.com/card/c/5708a1995fd193d76fcc7147/1/3/5/ server.js
+https://github.com/baizn/react-router-domand-loading serverold.js
+https://www.cnblogs.com/YZH-chengdu/p/6855237.html serverold.js
+https://segmentfault.com/q/1010000012366028 serverold.js
+https://cnodejs.org/topic/59ee9bbe9cf198a85bd2e210 serverold.js
+http://cw.hubwiz.com/card/c/5708a1995fd193d76fcc7147/1/3/5/ serverold.js
 https://stackoverflow.com/questions/42797543/whats-wrong-with-this-reactrouter-match-implementation/42798535#42798535 sever.js
 
 http://react-china.org/t/react-js/10144教你如何搭建一个超完美的React.js服务端渲染开发环境

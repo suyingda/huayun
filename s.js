@@ -16,7 +16,8 @@ app.use(webpackDevMiddleware(compiler, {
             colors: true,
             chunks: false
         },
-        historyApiFallback: true
+        historyApiFallback: true,
+
     })
 );
 app.use(webpackHotMiddleWare(compiler));
