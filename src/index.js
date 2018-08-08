@@ -18,6 +18,7 @@ console.log(store.getState()); */
 if (module.hot) {
     module.hot.accept();
 }
+
 ReactDOM.render(
     <Provider store={store}>
             <App/>
