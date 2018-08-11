@@ -64,6 +64,9 @@ class App extends Component {
         );
     }
 }
+/*App.propTypes = {
+    title: React.PropTypes.string.isRequired
+}*/
 
 const mapStateToProps = ((state, props) => {
     return state

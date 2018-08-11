@@ -15,6 +15,7 @@ store.dispatch({
   title: "苏英大"
 });
 console.log(store.getState()); */
+
 if (module.hot) {
     module.hot.accept();
 }
@@ -25,6 +26,9 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
-/* if (process.env.NODE_ENV !== 'production'){
+ if (process.env.NODE_ENV !== 'production'){
        console.log('Looks like we are in development mode!');
-   }*/
+   }else{
+     console.log('Looks like we are in prod mode!');
+ }
+

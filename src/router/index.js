@@ -54,7 +54,7 @@ export const routes = [
                 ]
             },
             {
-                path: "/cart",
+                path: "/cart/:obj",
                 component: Cart,
                 children: [
                     {

@@ -28,5 +28,18 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+  <script src="./../script/md5.js"></script>
+  <script src="./../script/base64.js"></script>
+  <script>
+    function GG(t,path,value){
+      // console.log(path,value,'gg函数')
+        let b = new Base64();
+        return  t+"/"+path+"/"+b.encode(JSON.stringify(value))
+    }
+    function GGG(value){
+        let b = new Base64();
+        return b.decode(value)
+    }
+  </script>
   </body>
 </html>

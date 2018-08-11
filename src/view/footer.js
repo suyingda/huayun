@@ -9,7 +9,7 @@ import RouteModule from './../Rt'
 class Footer extends Component {
 
     render() {
- console.log(this.props,'j绝对是')
+ // console.log(this.props,'j绝对是')
 
         return (<div>
             <h1>footer</h1>

@@ -5,7 +5,12 @@ import RouteModule from './../Rt'
 
 class Cart extends Component {
     render() {
-        console.log(this.props)
+        let {match} =this.props;
+        console.log(GGG(match.params.obj),'打印成功解析的数据')
+        // console.log(b.decode(match.params.obj),'等待着花开');
+        //解密
+
+        //将 Blob对象 读成字符串
         // console.log(typeof JSON.parse(this.props.match.params.id),'cart')
         return (
 
