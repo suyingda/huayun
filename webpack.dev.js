@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',

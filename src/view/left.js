@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
+import {path} from './../fetch/'
+
 
 class Left extends Component {
     constructor(arg) {
@@ -9,6 +11,11 @@ class Left extends Component {
         this.state = {
             matchPath: this.props.match.path
         }
+    }
+
+    componentDidMount() {
+        path.user.registerPost()
+        path.user.test2(1,  15, "0")
     }
 
     add() {

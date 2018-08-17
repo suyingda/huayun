@@ -19,7 +19,7 @@ module.exports = merge(common, {
         }), //创建html打包后
         new CleanWebpackPlugin(['dist']),// delete dist,
         new BaseHrefWebpackPlugin({baseHref: './'}),
-          new UglifyJSPlugin({
+        /*  new UglifyJSPlugin({
                        uglifyOptions:{
                            ecma: 8,
                            warnings: false,
@@ -28,7 +28,7 @@ module.exports = merge(common, {
                                beautify: false
                            },
                        }
-                   })
+                   })*/
         /*   new webpack.HotModuleReplacementPlugin(),
            new webpack.NoEmitOnErrorsPlugin(),*/
         /*  new UglifyJSPlugin({
