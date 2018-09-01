@@ -1,9 +1,10 @@
 import {combineReducers} from "redux";
-import pub from './pub'
-import a from './a'
+import _PUB from './pub.js';
 
+import _A from './a';
+const {first1}=_PUB.reducers;
 let reducers = combineReducers({
-    pub,
-    a
+    first1,
+    _A
 });
 export default reducers;

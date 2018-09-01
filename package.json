@@ -24,8 +24,8 @@
     "nn": "node  ./node_modules/babel-cli/bin/babel-node    --env.NODE_ENV=local    s.js",
     "nnnn": "node  ./node_modules/babel-cli/bin/babel-node   ./util/dev-static.js",
     "ser": "node  --experimental-modules ser.js",
-    "dev":"webpack-dev-server --config webpack.dev.js",
-    "prod":"webpack --config webpack.prod.js"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "prod": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "axios": "^0.18.0",
@@ -42,6 +42,7 @@
     "http-proxy-middleware": "^0.18.0",
     "lodash": "^4.17.10",
     "memory-fs": "^0.4.1",
+    "reselect": "^3.0.1",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",

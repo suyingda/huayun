@@ -2,11 +2,22 @@ import React, {Component} from "react";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
+import {connect} from 'react-redux';
+// import Transition from './../animation/Transition'
+import PUB from './../module/pub'
 
 class Cart extends Component {
+    componentDidMount() {
+        // console.log(this.props,'actions')
+    }
+
+
     render() {
-        let {match} =this.props;
-        console.log(GGG(match.params.obj),'打印成功解析的数据')
+        console.time('ss')
+        console.log(this.props, 'cartRedux')
+        console.timeEnd('ss')
+        let {match} = this.props;
+        // console.log(GGG(match.params.obj), '打印成功解析的数据')
         // console.log(b.decode(match.params.obj),'等待着花开');
         //解密
 
@@ -17,6 +28,15 @@ class Cart extends Component {
             <div>
                 Cart
                 <ul>
+                    <h1 onClick={() => {
+                        this.props.as(1);
+                    }}>update Footer</h1>
+                    <h1 onClick={() => {
+                        this.props.as(2);
+                    }}>update Footer</h1>
+                    <h1 onClick={() => {
+                        this.props.as(2);
+                    }}>update Footer</h1>
                     <li>
                         <Link to="/left/cart/test2">test2</Link>
                     </li>
@@ -28,4 +48,49 @@ class Cart extends Component {
     }
 }
 
-export default Cart;
+// import { createSelector } from 'reselect';
+import {visibleTodosSelector} from './../module/reselect'
+import {createSelector} from "reselect";
+
+const mapStateToProps = ((state, props) => {
+    function getVisibleTodos(vv) {
+        // console.log('update success', vv);
+        return vv.sort(function (a, b) {
+            // console.timeEnd('start2')
+            return a - b;
+        });
+    }
+
+    const todosSelector = (state) => state.first1;
+    const visibleTodosSelector = createSelector(
+        [todosSelector],
+        (first1) => {
+            return getVisibleTodos(first1)
+        }
+    );
+    return {
+        state:state.first1.sort(function(a,b){return a-b;})
+        // first1: visibleTodosSelector(state)
+        // newdata: state.a
+    }
+})
+
+
+/*
+const mapDispatchToProps = ((dispatch, getState) => {
+    return {
+        as: () => {
+            dispatch({
+                type: 'setFooter'
+            })
+        },
+        aadf: () => {
+            dispatch({
+                type: 'setHeader',
+            })
+        }
+    }
+})*/
+
+const {as, aadf} = PUB.actions;
+export default connect(mapStateToProps, {as, aadf})(Cart);

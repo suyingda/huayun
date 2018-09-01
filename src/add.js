@@ -11,7 +11,7 @@ class Add extends React.Component {
     }
 
     render() {
-        console.log(this.props.state.pub[0], 'app')
+        // console.log(this.props.state.pub[0], 'app')
         return (
             <div>
                 <Link to="/home">添加</Link>
@@ -22,7 +22,7 @@ class Add extends React.Component {
 }
 
 const mapStateToProps = ((state, props) => {
-    console.log(state, 'mapState')
+    // console.log(state, 'mapState')
     return {
         state,
         newdata: state.a
@@ -57,7 +57,7 @@ const mapDispatchToProps = ((dispatch, getState) => {
 })
 
 function add() {
-    console.log(1)
+    // console.log(1)
     return {
         type: 'test',
     }
@@ -65,12 +65,12 @@ function add() {
 
 function adddd() {
     for (var i = 0; i < 50; i++) {
-        console.log('我')
+        // console.log('我')
     }
 }
 
 function dafdsa() {
-    console.log('我被阻塞了')
+    // console.log('我被阻塞了')
 }
 
 // function as() {

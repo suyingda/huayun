@@ -38,11 +38,14 @@ class App extends Component {
     }*/
     render() {
 
-        console.log(this.props)
+          // console.log(this.props,'修改')
         return (
             <BrowserRouter>
                 <div>
-                    <h1>首页</h1>
+                    {/*<h1 >{this.props.pub[0]?this.props.pub[0].footer:''}</h1>*/}
+                 {/*   <h1 onClick={()=>{
+                        console.log(this.props.pub[0].footer)
+                    }}>首页</h1>*/}
                     <nav>
                         <ul>
                             <li>
@@ -73,11 +76,11 @@ const mapStateToProps = ((state, props) => {
 })
 const mapDispatchToProps = ((dispatch) => {
     return {
-        a: () => {
+      /*  a: () => {
             dispatch({
                 type: 'setHeader'
             })
-        }
+        }*/
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);
