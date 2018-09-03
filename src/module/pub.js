@@ -1,5 +1,5 @@
 import {arr} from './data.js';
-import {arr2} from './data.js';
+import {arr2} from './data2.js';
 
 const all = {
     selectors: {
@@ -8,49 +8,42 @@ const all = {
     },
     actions: {
         as: (v) => (dispatch, getState) => {
-            if (v == 1) {
-                dispatch({
-                    type: 'setHeader',
-
-                })
-            } else if (v == 2) {
-                dispatch({
-                    type: 'setFooter',
-                    data:arr
-                })
-            } else {
-                dispatch({ 
-                    type: 'set3',
-                    data:arr.concat(['苏英大'])
-                })
-            }
-
-        },
-        aadf: (v) => (dispatch, getState) => {
             dispatch({
                 type: 'setFooter',
+                data: arr
             })
-        },
+
+        }, aadf: (v) => (dispatch, getState) => {
+            dispatch({
+                type: 'set3',
+                data:arr2
+            })
+
+        }
 
     },
     reducers: {
-
         first1: (data = [], action) => {
-
-            console.log(action.type)
+            console.log(action.type,'frist1')
+            console.time('start1')
             switch (action.type) {
-                case "setHeader":
-                    return 123123123123123123123123;
                 case "setFooter":
                     // let aaa= action.data.sort(function(a,b){return a-b;});
-                    return arr
-                    // return action.data;
-                case "set3":
-                    return arr
+                    return action.data;
+                // return action.data;
                 default:
                     return data;
             }
-
+        },
+        first2: (data = [], action) => {
+            console.log(action,'frist2')
+            // console.time('start2')
+            switch (action.type) {
+                case "set3":
+                    return action.data
+                default:
+                    return data;
+            }
         }
     }
 

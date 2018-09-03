@@ -4,18 +4,27 @@ import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
 import {connect} from 'react-redux';
 // import Transition from './../animation/Transition'
+import {arequest} from './../fetch'
 import PUB from './../module/pub'
 
 class Cart extends Component {
-    componentDidMount() {
+    componentWillMount() {
+        arequest('http://172.254.68.140:8081/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]);
+      /*  path.user.registerPost(["PROJ_OBSERVE_AND_IMPOSE_TIME_POINT_TYPE", ""]).then(()=>{
+            console.log('successful');
+            alert(1)
+        }).catch(()=>{
+            console.log('error') ;  alert(1)
+        })*/
         // console.log(this.props,'actions')
     }
 
 
     render() {
-        console.time('ss')
-        console.log(this.props, 'cartRedux')
-        console.timeEnd('ss')
+        // console.time('ss')
+        console.log(this.props.first1, 'first1');
+        console.log(this.props.first2, 'first2');
+        // console.timeEnd('ss')
         let {match} = this.props;
         // console.log(GGG(match.params.obj), '打印成功解析的数据')
         // console.log(b.decode(match.params.obj),'等待着花开');
@@ -35,7 +44,7 @@ class Cart extends Component {
                         this.props.as(2);
                     }}>update Footer</h1>
                     <h1 onClick={() => {
-                        this.props.as(2);
+                        this.props.aadf(3);
                     }}>update Footer</h1>
                     <li>
                         <Link to="/left/cart/test2">test2</Link>
@@ -56,8 +65,7 @@ const mapStateToProps = ((state, props) => {
     function getVisibleTodos(vv) {
         // console.log('update success', vv);
         return vv.sort(function (a, b) {
-            // console.timeEnd('start2')
-            return a - b;
+            return b-a;
         });
     }
 
@@ -68,9 +76,15 @@ const mapStateToProps = ((state, props) => {
             return getVisibleTodos(first1)
         }
     );
+    let aaa=state.first1.sort(function(a,b){return b-a;});
+    // let aa2a=state.first2.sort(function(a,b){return a-b;});
+    console.timeEnd('start1')
+    // console.timeEnd('start2')
     return {
-        state:state.first1.sort(function(a,b){return a-b;})
-        // first1: visibleTodosSelector(state)
+        first1:aaa,
+        // first1: visibleTodosSelector(state),
+        first2:[1,2,3,4],
+
         // newdata: state.a
     }
 })

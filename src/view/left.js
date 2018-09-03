@@ -13,9 +13,9 @@ class Left extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {/*
         path.user.registerPost()
-        path.user.test2(1, 15, "0")
+        path.user.test2(1, 15, "0")*/
     }
 
     add() {
@@ -56,7 +56,9 @@ class Left extends Component {
                     <ul>
                         <li>
                             <Link to={this.state.matchPath + '/Footer'}>开启112323 </Link>
+
                         </li>
+                        <Link to={this.state.matchPath + '/Cart'}>CartCartCartCart </Link>
                         <li onClick={this.add.bind(this)}>Cart
                             {/*<Link to={path}>Cart{path}</Link>*/}
                         </li>

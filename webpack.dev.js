@@ -36,7 +36,10 @@ module.exports = merge(common, {
         // contentBase: path.join(__dirname, "dist"),
         // compress: true,
         open: false,
-        port: 9000,
+        port: 3002,
+        proxy: { // proxy URLs to backend development server
+            '/huayun/': 'http://172.254.68.140:8081'
+        },
         host: '::', // can be overwritten by process.env.HOST
         // contentBase: "./src/common",
         //服务器打包后输出的路径。
