@@ -1,43 +1,60 @@
 import {arr} from './data.js';
 import {arr2} from './data2.js';
+import {request} from './../fetch'
+import {createSelector} from "reselect";
 
 const all = {
-    selectors: {
+    state: {
         setfooter: "",
         setFooter: "",
     },
+    selectors: (state) => {
+        const todosSelector = (state) => state.first1;
+        return {
+             visibleTodosSelector:createSelector([todosSelector], (first1) => {
+                 return first1.sort(function (a,b){return a-b})
+             }),
+            abccc:123
+        }
+    },
     actions: {
         as: (v) => (dispatch, getState) => {
-            dispatch({
+           return all.Api.asApi().then((v) => {
+               return v;
+           }).catch((error)=>{
+               console.log(error,'接口获取失败')
+               return 0;
+           });
+       /*     dispatch({
                 type: 'setFooter',
                 data: arr
-            })
-
-        }, aadf: (v) => (dispatch, getState) => {
+            })*/
+        },
+        aadf: (v) => (dispatch, getState) => {
             dispatch({
                 type: 'set3',
-                data:arr2
+                data: arr2
             })
-
         }
-
+    },
+    Api: {
+        asApi: () => {
+            return request('/project/projectApi/searchById', ["afc24d3e-6667-45f2-9b42-07c86280d58a"]);
+        }
     },
     reducers: {
         first1: (data = [], action) => {
-            console.log(action.type,'frist1')
+            // console.log(action.type, 'frist1')
             console.time('start1')
             switch (action.type) {
                 case "setFooter":
-                    // let aaa= action.data.sort(function(a,b){return a-b;});
                     return action.data;
-                // return action.data;
                 default:
                     return data;
             }
         },
         first2: (data = [], action) => {
-            console.log(action,'frist2')
-            // console.time('start2')
+            console.log(action, 'frist2')
             switch (action.type) {
                 case "set3":
                     return action.data

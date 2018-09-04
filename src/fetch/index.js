@@ -3,14 +3,12 @@ import Axios from 'axios'
 // const Api = "http://172.253.32.131:9090/";
 const Api = "http://172.254.68.140:8081";
 const querystring = require('querystring');
-
-var Qs = require('qs');
 const obj = {
    // "Content-Type": "text/plain;charset=UTF-8",
    // "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     "auth.sysid":"1001",
     "Content-Type": "application/json;charset=UTF-8",
-    "auth.token":"eyJhbGciOiJIUzI1NiJ9.eyJlcHQiOjYwMCwiZXhwIjoxNTM2MDU3NTc0LCJpc3MiOiJjbXMiLCJ1c2VyQWNjb3VudCI6ImxpYW5neWluZyIsInNvdXJjZSI6InBvcnRhbCIsInVzZXJOYW1lIjoi5qKB6I65IiwidXNlcklkIjoibGlhbmd5aW5nIiwiX3VzZXJJZCI6IlVSMTAwMDAwNzAzOCIsIl91aWRfIjoibGlhbmd5aW5nIiwiYXVkIjoiMTAwMSIsImF0cCI6ImNtc19sb2dpbiJ9.MiaOobjGP_1cXzNCEkmnf6NWVDZ86g20t6T1da4w-G0","auth.sysid": 1001,
+    "auth.token":"eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbXMiLCJ1c2VyQWNjb3VudCI6ImxpYW5neWluZyIsInVzZXJOYW1lIjoi5qKB6I65IiwidXNlcklkIjoiVVIxMDAwMDA3MDM4IiwiX3VzZXJJZCI6IlVSMTAwMDAwNzAzOCIsIl91aWRfIjoiVVIxMDAwMDA3MDM4IiwiYXVkIjoiMTAwMSIsImVwdCI6NTI1NjAwLCJleHAiOjE1Njc2MDA4NTgsImF0cCI6InNlY3VyaXR5In0.K4wsXtuWJ2obZ3yCvFp2G7Guk71d5T32qlAvwPhwbDo",
     "auth.permit": "nGdeacZmW3E1XM9Wi5alwcMUCKeVDZ",
 
 }
@@ -20,8 +18,8 @@ const service = Axios.create({
     withCredentials:true
 });
 Axios.interceptors.request.use(config => {
+
      Object.assign(config.headers, obj);
-     console.log(obj,'obj')
     // config.data = Qs.stringify(config.data);
     return config;
 }, function (error) {
@@ -32,7 +30,7 @@ Axios.interceptors.request.use(config => {
 
 
 // 添加响应拦截器
-service.interceptors.response.use(function (response) {
+Axios.interceptors.response.use(function (response) {
     console.log(response, '收到数据')
     // 对响应数据做点什么
     return response;
@@ -40,22 +38,7 @@ service.interceptors.response.use(function (response) {
     // 对响应错误做点什么
     return Promise.reject(error);
 });
-/*Axios.interceptors.request.use(config => {
-    Object.assign(config.headers, {
-        // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'auth.token': 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbXMiLCJ1c2VyQWNjb3VudCI6ImxpYW5neWluZyIsInVzZXJOYW1lIjoi5qKB6I65IiwidXNlcklkIjoiVVIxMDAwMDA3MDM4IiwiX3VzZXJJZCI6IlVSMTAwMDAwNzAzOCIsIl91aWRfIjoiVVIxMDAwMDA3MDM4IiwiYXVkIjoiMTAwMSIsImVwdCI6NTI1NjAwLCJleHAiOjE1Njc0OTA5MDEsImF0cCI6InNlY3VyaXR5In0.iBx8ac2IKZHXkIu6ZpUuL4l4AQBBGvXJxxd1Ot1-6PM',
-        "auth.permit": "nGdeacZmW3E1XM9Wi5alwcMUCKeVDZ",
-        "auth.sysid": "1001",
-        "Accept": "*!/!*",
-        // "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-CN,zh;q=0.9",
-        "Connection": "keep-alive",
-        "Content-Length": 51,
-        "Content-Type": "text/plain;charset=UTF-8",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
-    });
-    return config;
-});*/
+
 
 /*
 function getUserAccount() {
@@ -78,7 +61,7 @@ function getUserPermissions() {
     }
 }*/
 // 发送 POST 请求
-Axios({
+/*Axios({
     method: 'post',
     url: '/admin/user/info',
     headers:{
@@ -87,19 +70,16 @@ Axios({
 
 }).then((res)=>{
     console.log(res,'故宫')
-});
-export const arequest = function (url, params) {
+});*/
+export const request = function (url, params) {
     return new Promise((resolve, reject) => {
-        /*    fetch(url,obj).then((re)=>{
-                console.log(re,'shuzhu')
-            }).catch((v)=>{
-                console.log(v,'slfjsdslksjflsjfsdslkdsjlkdsjfdlkfj')
-            })*/
         Axios.post(url, {'params': params}).then(function (response) {
                 console.log(response, 'response');
+                return resolve(response)
             })
             .catch(function (error) {
                 console.log(error, '未能拿到接口数据');
+                return reject(error)
             });
         /*  axios.post(Api + url, params).then(res => {
               if (res) {
