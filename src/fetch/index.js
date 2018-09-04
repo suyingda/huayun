@@ -3,29 +3,36 @@ import Axios from 'axios'
 // const Api = "http://172.253.32.131:9090/";
 const Api = "http://172.254.68.140:8081";
 const querystring = require('querystring');
+
+var Qs = require('qs');
 const obj = {
-    "Content-Type": "text/plain;charset=UTF-8",
-    // "Content-Type": "application/json",
-    "auth.token":"eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjbXMiLCJ1c2VyQWNjb3VudCI6ImxpYW5neWluZyIsInVzZXJOYW1lIjoi5qKB6I65IiwidXNlcklkIjoiVVIxMDAwMDA3MDM4IiwiX3VzZXJJZCI6IlVSMTAwMDAwNzAzOCIsIl91aWRfIjoiVVIxMDAwMDA3MDM4IiwiYXVkIjoiMTAwMSIsImVwdCI6NTI1NjAwLCJleHAiOjE1Njc1MDg4MTUsImF0cCI6InNlY3VyaXR5IiwiYml6RGVwdElkIjoiT1IxMDAwMDAyNTYwIiwidGVhbUlkIjoiM2FjYmI3YjMtYzRmZS00ZGZmLWIyNDYtNGZiMWFmNzIwNGI5In0.UPAdlcIGAvo0tIHF84Nu_DSRi9XM1E9U6RO4MLMUElI",
-    "auth.sysid": 1001,
+   // "Content-Type": "text/plain;charset=UTF-8",
+   // "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "auth.sysid":"1001",
+    "Content-Type": "application/json;charset=UTF-8",
+    "auth.token":"eyJhbGciOiJIUzI1NiJ9.eyJlcHQiOjYwMCwiZXhwIjoxNTM2MDU3NTc0LCJpc3MiOiJjbXMiLCJ1c2VyQWNjb3VudCI6ImxpYW5neWluZyIsInNvdXJjZSI6InBvcnRhbCIsInVzZXJOYW1lIjoi5qKB6I65IiwidXNlcklkIjoibGlhbmd5aW5nIiwiX3VzZXJJZCI6IlVSMTAwMDAwNzAzOCIsIl91aWRfIjoibGlhbmd5aW5nIiwiYXVkIjoiMTAwMSIsImF0cCI6ImNtc19sb2dpbiJ9.MiaOobjGP_1cXzNCEkmnf6NWVDZ86g20t6T1da4w-G0","auth.sysid": 1001,
     "auth.permit": "nGdeacZmW3E1XM9Wi5alwcMUCKeVDZ",
-    /*  'Access-Control-Allow-Credentials' : true,
-     'Access-Control-Allow-Origin':'*',
- /*    'Access-Control-Allow-Methods':'POST',
-     'Access-Control-Allow-Headers':'application/json',*/
+
 }
 // 添加请求拦截器
+const service = Axios.create({
+    timeout:30000,
+    withCredentials:true
+});
 Axios.interceptors.request.use(config => {
-    Object.assign(config.headers, obj);
+     Object.assign(config.headers, obj);
+     console.log(obj,'obj')
+    // config.data = Qs.stringify(config.data);
     return config;
 }, function (error) {
     // 对请求错误做些什么
+    console.log(error,'ssd')
     return Promise.reject(error);
 });
 
 
 // 添加响应拦截器
-Axios.interceptors.response.use(function (response) {
+service.interceptors.response.use(function (response) {
     console.log(response, '收到数据')
     // 对响应数据做点什么
     return response;
@@ -71,16 +78,16 @@ function getUserPermissions() {
     }
 }*/
 // 发送 POST 请求
-/*axios({
+Axios({
     method: 'post',
-    url: 'http://172.253.32.131:9090/client/clientApi/provList',
-    data: {
-        firstName: 'Fred',
-        lastName: 'Flintstone'
-    }
+    url: '/admin/user/info',
+    headers:{
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    },
+
 }).then((res)=>{
     console.log(res,'故宫')
-});*/
+});
 export const arequest = function (url, params) {
     return new Promise((resolve, reject) => {
         /*    fetch(url,obj).then((re)=>{
@@ -88,8 +95,7 @@ export const arequest = function (url, params) {
             }).catch((v)=>{
                 console.log(v,'slfjsdslksjflsjfsdslkdsjlkdsjfdlkfj')
             })*/
-        Axios.post(url, {'params': params})
-            .then(function (response) {
+        Axios.post(url, {'params': params}).then(function (response) {
                 console.log(response, 'response');
             })
             .catch(function (error) {

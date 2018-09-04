@@ -36,9 +36,19 @@ module.exports = merge(common, {
         // contentBase: path.join(__dirname, "dist"),
         // compress: true,
         open: false,
-        port: 3002,
-        proxy: { // proxy URLs to backend development server
-            '/huayun/': 'http://172.254.68.140:8081'
+        port: 3000,
+        /*   proxy: { // proxy URLs to backend development server
+               '/huayun/': 'http://172.254.68.140:8081'
+           },*/
+        proxy: {
+            "/project/*": {
+                target: 'http://172.254.68.140:8081',
+                changeOrigin: true
+            },
+            "/admin/*": {
+                target: 'http://172.254.68.140:8081',
+                changeOrigin: true
+            }
         },
         host: '::', // can be overwritten by process.env.HOST
         // contentBase: "./src/common",

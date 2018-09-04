@@ -9,7 +9,7 @@ import PUB from './../module/pub'
 
 class Cart extends Component {
     componentWillMount() {
-        arequest('http://172.254.68.140:8081/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]);
+        arequest('/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]);
       /*  path.user.registerPost(["PROJ_OBSERVE_AND_IMPOSE_TIME_POINT_TYPE", ""]).then(()=>{
             console.log('successful');
             alert(1)
