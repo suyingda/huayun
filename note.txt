@@ -1,0 +1,51 @@
+mongod --dbpath=H:\study\nodejs\Blog2\db --port=27017
+mongod --dbpath=H:\study\nodejs\Blog2new\db --port=27017
+
+H:\Program Files\MongoDB\Server\3.0\bin
+
+tail /var/log/mongodb/mongod.log -n100  日志查看
+netstat -nltp   端口查看
+vim /etc/mongod.conf   文件修改
+service mongod restart   服务重启
+
+killall node  关闭端口
+
+ps -aux  查看进程
+
+kill -9  pID
+
+
+
+fruit
+G:\MongoDB\bin
+mongod --dbpath=H:\study\nodejs\Blog2new\db 
+mongod --dbpath=C:\Users\10230\Desktop\小程序项目\Blog2new\db --port=27017
+mongod --dbpath=G:\小程序项目\端午节\Blog2new\db  --port=27017
+
+
+
+
+配置https
+curl https://get.acme.sh | sh
+
+acme.sh --issue -d es6.pub -d *.es6.pub --dns dns_cf --keylength ec-256  //手动看阿里云配置   https://github.com/Neilpang/acme.sh/wiki/dns-manual-mode
+
+acme.sh --issue -d es6.pub -d *.es6.pub --dns --keylength ec-256 --yes-I-know-dns-manual-mode-enough-go-ahead-please   增加  代码命令行
+acme.sh --issue -d es6.pub -d *.es6.pub --dns --keylength ec-256 --yes-I-know-dns-manual-mode-enough-go-ahead-please --renew   （kbd)
+上2行无反应
+
+前往阿里云  accesskey  查看
+export Ali_Key="LTAIc1CIE1q1bDsf"
+export Ali_Secret="yGLMFlWh11rgMHSP6j68FBQSXjownV"
+
+acme.sh --issue -d es6.pub -d *.es6.pub --dns dns_ali --keylength ec-256
+
+
+rm ~/.acme.sh/ 查看  文件
+rm ~/.acme.sh/ -rf   删除 重来一遍
+
+
+ curl https://get.acme.sh | sh
+acme.sh --issue -d es6.pub -d *.es6.pub --dns dns_ali --keylength ec-256
+
+sz /root/.acme.sh/es6.pub_ecc/ca.cer 发送到 桌面

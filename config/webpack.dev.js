@@ -3,20 +3,24 @@ const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
+const path=require('path');
+const  Proxy =require('./proxy-target.js')
+console.log(Proxy,'Proxy')
+const pathName=path.join(__dirname, '..');
 module.exports = merge(common, {
     mode: 'development',
     // devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'public/index.html',
+            template:path.join(__dirname, '..', '/public/index.html'),
             // minify  : true,
             minify: { //压缩HTML文件
                 removeComments: true,  //移除HTML中的注释
                 collapseWhitespace: true  //删除空白符与换行符
             },
         }), //创建html打包后
-        new CleanWebpackPlugin(['dist']),// delete dist,
+        new CleanWebpackPlugin([path.join(__dirname, '..','/dist')],{ allowExternal: true}),// delete dist,
         new BaseHrefWebpackPlugin({baseHref: '/'}),
         /*   new webpack.HotModuleReplacementPlugin(),
            new webpack.NoEmitOnErrorsPlugin(),*/
@@ -41,15 +45,16 @@ module.exports = merge(common, {
                '/huayun/': 'http://172.254.68.140:8081'
            },*/
         proxy: {
-            "/project/*": {
+            "/project/*":  Proxy.target,
                 // target: 'http://172.254.68.140:8081',
-                target: 'http://172.253.32.131:9150/',
+                // target: 'http://172.253.32.131:9150/',
                 // target: 'http://172.253.32.131:9150',
-                changeOrigin: true
-            },
+                //  target: 'http://172.253.32.131:9402/',
+                // changeOrigin: true
+            // },
             "/admin/*": {
                 target: 'http://172.254.68.140:8081',
-                changeOrigin: true
+                // changeOrigin: true
             }
         },
         host: '::', // can be overwritten by process.env.HOST
