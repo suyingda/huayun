@@ -2,24 +2,26 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
-const pathName=path.join(__dirname, '..');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const pathName = path.join(__dirname, '..');
 module.exports = {
     entry: {
-        app:path.join(__dirname, '..', '/src/index.js'),
-        vendor: ['react','react-router-dom','react-redux','redux'] //提取react模块作为公共的js文件
+        app: path.join(__dirname, '..', '/src/index.js'),
+        vendor: ['react', 'react-router-dom', 'react-redux', 'redux'] //提取react模块作为公共的js文件
     },
     output: {
         path: path.resolve(pathName, 'dist/'),
         // path: __dirname,   webpack 4.0前
         filename: '[name].index.js',
         //所有资源的基础路径，而且一定是/结尾
-        publicPath: './',
+        publicPath: '/',
         chunkFilename: '[name].[chunkhash:5].chunk.js',    // 添加 chunkFilenamemodule
     },
+
     optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
+         splitChunks: {
+             chunks: 'all'
+         }
     },
 
     module: {

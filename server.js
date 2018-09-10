@@ -49,23 +49,25 @@ let webpackHotMiddleWare = require('webpack-hot-middleware');
 var webpackconfig = require('./config/webpack.dev')
 var compiler = webpack(webpackconfig); // console.log(compiler);
 
+/*
 app.use(webpackDevMiddleware(compiler, {
-        /*  open: true,
-          publicPath: '/',
-
-          historyApiFallback: true,*/
+     open: true,
+          // publicPath: '/',
+          //
+          // historyApiFallback: true,
     })
 );
+*/
 
 
 
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // app.use(logger('dev'));
 // app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/dist/index.html'));
+/*app.use(express.static(__dirname + '/dist/index.html'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: false}));*/
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.set('view engine', 'html');
 /*
@@ -89,11 +91,24 @@ app.get('*', function (req, res) {
 });
 
 
+// const port = process.env.PORT || 8080;
+
+
+//加载指定目录静态资源
+app.use(express.static(__dirname + '/dist'))
+
+//配置任何请求都转到index.html，而index.html会根据React-Router规则去匹配任何一个route
+app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+});
+
+
+
 /*app.engine('.ejs', require('ejs').__express)
 app.set('views', __dirname +'/src/views');*/
 
 
-app.use(require("webpack-hot-middleware")(compiler));
+// app.use(require("webpack-hot-middleware")(compiler));
 // app.use(webpackHotMiddleWare(compiler));
 app.listen(3001, () => {
     console.log('Listening on: http://localhost:3001');

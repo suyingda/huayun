@@ -63,6 +63,7 @@ class Cart extends Component {
                     }}>update Footer</h1>
                     <h1 onClick={async () => {
                         const res = await this.props.as(2);
+                        console.log(res,'异步')
                         res && console.log(res, '先行一步');
 
                     }}>update Footer</h1>
