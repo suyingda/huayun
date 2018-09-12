@@ -40,7 +40,7 @@ module.exports = merge(common, {
         // contentBase: path.join(__dirname, "dist"),
         // compress: true,
         open: false,
-        port: 3001,
+        port:8003,
         /*   proxy: { // proxy URLs to backend development server
                '/huayun/': 'http://172.254.68.140:8081'
            },*/

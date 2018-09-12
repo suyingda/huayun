@@ -1,7 +1,8 @@
-import {arr} from './data.js';
+import arr from './data.js';
 import {arr2} from './data2.js';
 import {request} from './../fetch'
 import {createSelector} from "reselect";
+import Reselect from './reselect'
 
 const all = {
     state: {
@@ -9,31 +10,44 @@ const all = {
         setFooter: "",
     },
     selectors: (state) => {
+        const getVisibleTodos=(vv)=> {
+           return  vv.filter((v)=>{ return 0==v%2});
+        };
         const todosSelector = (state) => state.first1;
         return {
-             visibleTodosSelector:createSelector([todosSelector], (first1) => {
-                 return first1.sort(function (a,b){return a-b})
-             }),
-            abccc:123
+            visibleTodosSelector: createSelector(
+                [todosSelector],
+                (first1) => {
+                    return getVisibleTodos(first1)
+                }
+            ),
+            abccc: 123
         }
     },
     actions: {
+
         as: (v) => (dispatch, getState) => {
-           return all.Api.asApi().then((v) => {
-               return v;
-           }).catch((error)=>{
-               console.log(error,'接口获取失败')
-               return 0;
-           });
-       /*     dispatch({
+            /*      return all.Api.asApi().then((v) => {
+                      return v;
+                  }).catch((error)=>{
+                      console.log(error,'接口获取失败')
+                      return 0;
+                  });*/
+            dispatch({
                 type: 'setFooter',
                 data: arr
-            })*/
+            })
         },
         aadf: (v) => (dispatch, getState) => {
             dispatch({
                 type: 'set3',
-                data: arr2
+                data: [1, 2, 3, 4, 5]
+            })
+        },
+        c: (v) => (dispatch, getState) => {
+            dispatch({
+                type: 'cccc',
+                data: [1, 2, 3, 4, 5,6,66,7,8]
             })
         }
     },
@@ -44,8 +58,7 @@ const all = {
     },
     reducers: {
         first1: (data = [], action) => {
-            // console.log(action.type, 'frist1')
-            console.time('start1')
+
             switch (action.type) {
                 case "setFooter":
                     return action.data;
@@ -53,8 +66,15 @@ const all = {
                     return data;
             }
         },
+        first3: (data = [], action) => {
+            switch (action.type) {
+                case "cccc":
+                    return action.data
+                default:
+                    return data;
+            }
+        },
         first2: (data = [], action) => {
-            console.log(action, 'frist2')
             switch (action.type) {
                 case "set3":
                     return action.data

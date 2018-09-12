@@ -104,8 +104,8 @@ function getCookie(c_name)
 }
 export const RouteWithSubRoutes = route =>{
     // Setcookie('suyingda','syd')
-   console.log(getCookie('suyingda'))
-    console.log(route,'route match')
+/*   console.log(getCookie('suyingda'))
+    console.log(route,'route match')*/
 
 
 

@@ -55,11 +55,11 @@ class Left extends Component {
                     <h4>left</h4>
                     <ul>
                         <li>
-                            <Link to={this.state.matchPath + '/Footer'}>开启112323 </Link>
+                            <Link to={this.state.matchPath + '/Footer'}>left </Link>
 
                         </li>
-                        <Link to={this.state.matchPath + '/Cart'}>CartCartCartCart </Link>
-                        <li onClick={this.add.bind(this)}>Cart
+                        <Link to={this.state.matchPath + '/Cart'}>Cart </Link>
+                        <li onClick={this.add.bind(this)}>Cart111111111111111111
                             {/*<Link to={path}>Cart{path}</Link>*/}
                         </li>
                     </ul>
