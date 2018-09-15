@@ -2,30 +2,47 @@ import arr from './data.js';
 import {arr2} from './data2.js';
 import {request} from './../fetch'
 import {createSelector} from "reselect";
-import Reselect from './reselect'
+import {visibleTodosSelector, XHL_forEach} from './reselect'
+function getVisibleTodos(first1) {
+    let aaa = [];
+    first1 && first1.forEach((v) => {
+        aaa.push(v + '苏英大');
+    });
+    console.log('change!!!')
+    return aaa;
+}
 
 const all = {
     state: {
         setfooter: "",
         setFooter: "",
     },
+    aaa:{
+        // visibleTodosSelector:visibleTodosSelector(getVisibleTodos,'first1').reselect,
+        visibleTodosSelector: (selectors)=>{
+            let aaa=[]
+            selectors.first1.forEach((v)=>{
+                aaa.push(v+'dsjfldskfldsfsjfk')
+            });
+            return aaa
+        },
+        first2:(selectors)=>selectors.first2
+    },
     selectors: (state) => {
-        const getVisibleTodos=(vv)=> {
-           return  vv.filter((v)=>{ return 0==v%2});
-        };
-        const todosSelector = (state) => state.first1;
+        /* const fu=  (first1) =>{
+             let aaa=[]
+        first1.forEach((v) => {
+            aaa.push(v + 'update update');
+        });
+        console.log('change!!!')
+        return aaa;
+    }*/
+        XHL_forEach(getVisibleTodos(state.first1))
         return {
-            visibleTodosSelector: createSelector(
-                [todosSelector],
-                (first1) => {
-                    return getVisibleTodos(first1)
-                }
-            ),
-            abccc: 123
+            visibleTodosSelector: visibleTodosSelector(state)
         }
     },
     actions: {
-
         as: (v) => (dispatch, getState) => {
             /*      return all.Api.asApi().then((v) => {
                       return v;
@@ -41,13 +58,13 @@ const all = {
         aadf: (v) => (dispatch, getState) => {
             dispatch({
                 type: 'set3',
-                data: [1, 2, 3, 4, 5]
+                data: [1, 2, 3, 4, 5,'first2']
             })
         },
         c: (v) => (dispatch, getState) => {
             dispatch({
                 type: 'cccc',
-                data: [1, 2, 3, 4, 5,6,66,7,8]
+                data: [1, 2, 3, 4, 5, 6, 66, 7, 8]
             })
         }
     },
@@ -58,7 +75,6 @@ const all = {
     },
     reducers: {
         first1: (data = [], action) => {
-
             switch (action.type) {
                 case "setFooter":
                     return action.data;
@@ -83,8 +99,6 @@ const all = {
             }
         }
     }
-
-
 }
 
 /*

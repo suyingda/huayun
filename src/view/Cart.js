@@ -8,6 +8,7 @@ import {request} from './../fetch'
 import PUB from './../module/pub'
 
 class Cart extends Component {
+
     componentWillMount() {
         // this.props.as();
         /*  request('/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]).then((v)=>{
@@ -22,6 +23,9 @@ class Cart extends Component {
         // console.log(this.props,'actions')
     }
 
+    abc = () => {
+        this.props.aadf(3);
+    }
 
     render() {
         console.log(this.props);
@@ -50,8 +54,8 @@ class Cart extends Component {
 
                         this.props.as(2);
                     }}>11111111111</h1>
-                    <h1 onClick={() => {
-                        this.props.aadf(3);
+                    <h1 onClick={()=>{
+                        this.abc()
                     }}>2222222222</h1>
                     <h1 onClick={() => {
                         this.props.c();
@@ -68,26 +72,14 @@ class Cart extends Component {
 }
 
 // import { createSelector } from 'reselect';
-import {visibleTodosSelector} from './../module/reselect'
-import {createSelector} from "reselect";
+// import {visibleTodosSelector} from './../module/reselect'
+// import {createSelector} from "reselect";
 
 const mapStateToProps = ((state, props) => {
-    console.time('start1')
-    let aaa = [];
-    // const {visibleTodosSelector} = PUB.selectors(state);
-      let newa = () => {
-
-          state.first1.forEach((v) => {
-              // for(var i =0;i<1000;i++){}
-              aaa.push(v + '苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏苏');
-          });
-          return aaa;
-      };
+    const {visibleTodosSelector, first2} = PUB.aaa
     return {
-        // first1: newa(),
-        // first1:aaa() ,
         first1: visibleTodosSelector(state),
-        first2: [1, 2, 3, 4],
+        first2: first2(state),
         first3: [1, 2, 3, 4]
 
         // newdata: state.a

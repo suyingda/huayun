@@ -40,7 +40,7 @@ module.exports = merge(common, {
         // contentBase: path.join(__dirname, "dist"),
         // compress: true,
         open: false,
-        port:8003,
+        port:1000,
         /*   proxy: { // proxy URLs to backend development server
                '/huayun/': 'http://172.254.68.140:8081'
            },*/
@@ -65,5 +65,5 @@ module.exports = merge(common, {
         // mode     : 'development',//设置环境依赖  4.0报错,
         // inline: true, // 文件改变自动刷新页面
     },
-
+    // devtool: 'source-map'
 });
