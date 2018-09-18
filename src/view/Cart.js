@@ -5,10 +5,16 @@ import RouteModule from './../Rt'
 import {connect} from 'react-redux';
 // import Transition from './../animation/Transition'
 import {request} from './../fetch'
+
+import PropTypes from 'prop-types';
 import PUB from './../module/pub'
+import ChildTwo from "../context/two";
 
 class Cart extends Component {
-
+/*    constructor(props, _this) {
+        super(props);
+     console.log(_this,'jdsflkdsaf')
+    }*/
     componentWillMount() {
         // this.props.as();
         /*  request('/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]).then((v)=>{
@@ -27,8 +33,13 @@ class Cart extends Component {
         this.props.aadf(3);
     }
 
+    handleChange = (e) => {
+        const { changeValue } = this.context
+        changeValue(e.target.value)
+    }
     render() {
         console.log(this.props);
+
 
         // console.time('ss')
         /*    console.log(this.props.first1, 'first1');
@@ -45,9 +56,14 @@ class Cart extends Component {
 
             <div>
                 Cart
+                子组件一
+                <p>{this.context.value}</p>
+                <input onChange={this.handleChange} />
+
                 <ul>
 
                     <h1 onClick={() => {
+
                         // const res = await this.props.as(2);
                         // console.log(res,'异步')
                         // res && console.log(res, '先行一步');
@@ -55,6 +71,7 @@ class Cart extends Component {
                         this.props.as(2);
                     }}>11111111111</h1>
                     <h1 onClick={()=>{
+
                         this.abc()
                     }}>2222222222</h1>
                     <h1 onClick={() => {
@@ -76,7 +93,7 @@ class Cart extends Component {
 // import {createSelector} from "reselect";
 
 const mapStateToProps = ((state, props) => {
-    const {visibleTodosSelector, first2} = PUB.aaa
+    const {visibleTodosSelector, first2} = PUB.aaa;
     return {
         first1: visibleTodosSelector(state),
         first2: first2(state),
@@ -103,5 +120,11 @@ const mapDispatchToProps = ((dispatch, getState) => {
     }
 })*/
 
+Cart.contextTypes = {
+    changeValue: PropTypes.func,
+    value: PropTypes.string,
+    routers1:PropTypes.func,
+    routers2:PropTypes.func,
+}
 
 export default connect(mapStateToProps, {as, aadf, c})(Cart);

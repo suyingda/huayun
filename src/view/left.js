@@ -4,7 +4,7 @@ import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
 import {path} from './../fetch/'
 
-
+import PropTypes from 'prop-types';
 class Left extends Component {
     constructor(arg) {
         super(arg);
@@ -32,15 +32,13 @@ class Left extends Component {
                   console.log(str,'left')*/
 
 
-        let path = GG(this.state.matchPath, 'cart', data)
-
-
+        let path = this.context.routers1(this.state.matchPath, 'cart', data)
         // let path = `${this.state.matchPath}/cart/${GG(data)}`;console.log(path)
         this.props.history.push(path);
     }
 
     render() {
-
+        console.log(this,'就来看待世界法律考多少分')
         return (
             <div>
                 <div
@@ -74,5 +72,10 @@ class Left extends Component {
         );
     }
 }
-
+Left.contextTypes = {
+    changeValue: PropTypes.func,
+    value: PropTypes.string,
+    routers1:PropTypes.func,
+    routers2:PropTypes.func,
+}
 export default Left;

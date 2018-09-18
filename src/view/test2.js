@@ -8,6 +8,7 @@ import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 class Test extends Component {
 
     render() {
+        // console.log(this,'test2')
         return (<div>
             <h1>test2</h1>
             <Link to="/left">返回</Link>

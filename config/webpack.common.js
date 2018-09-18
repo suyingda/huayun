@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pathName = path.join(__dirname, '..');
 module.exports = {
     entry: {
@@ -19,9 +20,9 @@ module.exports = {
     },
 
     optimization: {
-         splitChunks: {
-             chunks: 'all'
-         }
+        splitChunks: {
+            chunks: 'all'
+        }
     },
 
     module: {
@@ -42,11 +43,79 @@ module.exports = {
                         } */
                     },
                 ],
-
                 exclude: [path.resolve(path.join(__dirname, '..'), 'node_modules/')],
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[path]-[name]-[local]-[hash:base64:6]'
+                        }
+                    }]
+                }),
 
-            }
+                /*   use: ExtractTextPlugin.extract({
+                       fallback: "style-loader",
+                       use:  {
+                           loader : 'css-loader',
+                           options: {
+                               module        : true,
+                               localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
+                           },
+                       },
+                   }),*/
+                /*  use    : [
+                      'style-loader',
+                      {
+                          loader : 'css-loader',
+                          options: {
+                              module        : false,
+                              localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
+                          },
+                      },
+                  ],*/
+                exclude: [
+                    path.resolve(path.join(__dirname, '..'), 'node_modules/'),
+                    // path.resolve(path.join(__dirname, '..'), 'src/css/'),
+                ],
+            },
+            /* {
+                 test   : /\.css$/,
+                 use    : ['style-loader', 'css-loader'],
+                 include: [
+                     path.resolve(path.join(__dirname, '..'), 'node_modules/'),
+                     // path.resolve(path.join(__dirname, '..'), 'src/css/'),
 
+                 ],
+             },*/
+           /* {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
+            },*/
+           /* {
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
+            },*/
+             {
+                 test: /\.(jpg|png|gif|jpeg|svg)$/,
+                 use : [
+                     {
+                         loader : 'file-loader',
+                         options: {
+                             limit: 10000,
+                             name : 'static/img/[name]_[hash:8].[ext]',
+                          /*   publicPath:'/',
+                             outputPath:"images"*/
+                         },
+                     },
+                 ],
+             },
         ]
     },
 };

@@ -1,8 +1,8 @@
 import arr from './data.js';
-import {arr2} from './data2.js';
+
 import {request} from './../fetch'
 import {createSelector} from "reselect";
-import {visibleTodosSelector, XHL_forEach} from './reselect'
+import {visibleTodosSelector} from './reselect'
 function getVisibleTodos(first1) {
     let aaa = [];
     first1 && first1.forEach((v) => {
@@ -18,14 +18,14 @@ const all = {
         setFooter: "",
     },
     aaa:{
-        // visibleTodosSelector:visibleTodosSelector(getVisibleTodos,'first1').reselect,
-        visibleTodosSelector: (selectors)=>{
+        visibleTodosSelector:visibleTodosSelector(getVisibleTodos,'first1').reselect,
+      /*  visibleTodosSelector: (selectors)=>{
             let aaa=[]
             selectors.first1.forEach((v)=>{
                 aaa.push(v+'dsjfldskfldsfsjfk')
             });
             return aaa
-        },
+        },*/
         first2:(selectors)=>selectors.first2
     },
     selectors: (state) => {

@@ -3,6 +3,7 @@ const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 /* 压缩js另外的插件 */
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -21,6 +22,7 @@ module.exports = merge(common, {
         }), //创建html打包后
         new CleanWebpackPlugin([path.join(__dirname, '..', '/dist')], {allowExternal: true}),// delete dist,
         new BaseHrefWebpackPlugin({baseHref: '/'}),
+        new ExtractTextPlugin("css/index.css") //默认其实目录问打包后的入口文件路径，所以需要..
       /*  new UglifyJSPlugin({
             uglifyOptions: {
                 ecma: 8,

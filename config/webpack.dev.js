@@ -3,6 +3,7 @@ const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path=require('path');
 const  Proxy =require('./proxy-target.js')
 console.log(Proxy,'Proxy')
@@ -21,7 +22,8 @@ module.exports = merge(common, {
             },
         }), //创建html打包后
         new CleanWebpackPlugin([path.join(__dirname, '..','/dist')],{ allowExternal: true}),// delete dist,
-        new BaseHrefWebpackPlugin({baseHref: '/'}),
+        // new BaseHrefWebpackPlugin({baseHref: '/'}),
+        new ExtractTextPlugin("index.css") //默认其实目录问打包后的入口文件路径，所以需要..
         /*   new webpack.HotModuleReplacementPlugin(),
            new webpack.NoEmitOnErrorsPlugin(),*/
         /*  new UglifyJSPlugin({
@@ -60,7 +62,7 @@ module.exports = merge(common, {
         host: '::', // can be overwritten by process.env.HOST
         // contentBase: "./src/common",
         //服务器打包后输出的路径。
-        publicPath: '/',
+        // publicPath: '/',
         historyApiFallback: true,
         // mode     : 'development',//设置环境依赖  4.0报错,
         // inline: true, // 文件改变自动刷新页面
