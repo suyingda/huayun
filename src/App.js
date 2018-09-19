@@ -6,21 +6,21 @@ import right from "./add";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
-// import {re} from './reducers'
-// import './css/css.css'
-// import './css/cs.css'
-import Styles from './css/cs.css';
+
+
+// import Styles from './css/cs-m.css';
+
 import RouteModule from './Rt'
 import ChildOne from './context/one'
 import ChildTwo from './context/two'
-console.log(Styles)
+
 class App extends Component {
 
     /*   constructor(arg,_this){
            super(arg);
        }*/
 
-    routers1 = (t, path, value) => {
+   /* routers1 = (t, path, value) => {
         // console.log(path,value,'gg函数')
         let b = new Base64();
         return t + "/" + path + "/" + b.encode(JSON.stringify(value))
@@ -29,7 +29,7 @@ class App extends Component {
         let b = new Base64();
         return b.decode(value)
     }
-
+*/
     componentDidMount() {
         window.callback = () => _this.callback()
         // this.props.a()
@@ -64,8 +64,8 @@ class App extends Component {
         return {
             value: this.state.value,
             changeValue: this.changeValue,
-            routers1: this.routers1,
-            routers2: this.routers2
+           /* routers1: this.routers1,
+            routers2: this.routers2*/
         }
     }
 
@@ -88,7 +88,7 @@ class App extends Component {
                             <use xlinkHref="#icon-bianji"/>
                         </svg>
 
-                        <div className={Styles.aaa}>13213312</div>
+                        {/*<div className={Styles.aaa}>13213312</div>*/}
                         {/*<div className={aaa}>13213312</div>*/}
                         <ul>
                             <li>
@@ -129,8 +129,7 @@ const mapDispatchToProps = ((dispatch) => {
 })
 //这样我们的context中已经注册了config对象了
 App.childContextTypes = {
-    routers1: PropTypes.func,
-    routers2: PropTypes.func,
+
     value: PropTypes.string,
     changeValue: PropTypes.func
 }

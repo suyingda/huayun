@@ -19,9 +19,10 @@ module.exports = merge(common, {
                 removeComments: true,  //移除HTML中的注释
                 collapseWhitespace: true  //删除空白符与换行符
             },
+            // chunksSortMode: 'none'
         }), //创建html打包后
         new CleanWebpackPlugin([path.join(__dirname, '..', '/dist')], {allowExternal: true}),// delete dist,
-        new BaseHrefWebpackPlugin({baseHref: '/'}),
+        // new BaseHrefWebpackPlugin({baseHref: '/'}),
         new ExtractTextPlugin("css/index.css") //默认其实目录问打包后的入口文件路径，所以需要..
       /*  new UglifyJSPlugin({
             uglifyOptions: {

@@ -9,12 +9,12 @@ import {request} from './../fetch'
 import PropTypes from 'prop-types';
 import PUB from './../module/pub'
 import ChildTwo from "../context/two";
-import styles from './csscss/cart.css'
+
 class Cart extends Component {
-    /*    constructor(props, _this) {
-            super(props);
-         console.log(_this,'jdsflkdsaf')
-        }*/
+/*    constructor(props, _this) {
+        super(props);
+     console.log(_this,'jdsflkdsaf')
+    }*/
     componentWillMount() {
         // this.props.as();
         /*  request('/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]).then((v)=>{
@@ -55,7 +55,7 @@ class Cart extends Component {
         return (
 
             <div>
-                <div className={styles.header}>Cart</div>
+                Cart
                 子组件一
                 <p>{this.context.value}</p>
                 <input onChange={this.handleChange} />
@@ -123,7 +123,8 @@ const mapDispatchToProps = ((dispatch, getState) => {
 Cart.contextTypes = {
     changeValue: PropTypes.func,
     value: PropTypes.string,
-
+    routers1:PropTypes.func,
+    routers2:PropTypes.func,
 }
 
 export default connect(mapStateToProps, {as, aadf, c})(Cart);

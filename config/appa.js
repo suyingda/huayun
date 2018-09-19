@@ -66,7 +66,7 @@ var server = http.createServer(function (req, res) {
             res.end();*/
         } else {
             res.writeHeader(200, {
-                'content-type': 'text/html;charset="utf-8"',
+                // 'content-type': 'text/html;charset="utf-8"',
             });
             res.write(data);//将index.html显示在客户端
             res.end();

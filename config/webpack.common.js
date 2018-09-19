@@ -45,6 +45,32 @@ module.exports = {
                 ],
                 exclude: [path.resolve(path.join(__dirname, '..'), 'node_modules/')],
             },
+
+
+         /*   {
+                test: /-m\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                localIdentName: '[path][name]-[local]-[hash:base64:5]'
+                            }
+                        }
+                    ]
+                })
+            },
+            {
+                test: /^((?!(-m)).)*\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
+            },
+*/
+
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
@@ -57,18 +83,7 @@ module.exports = {
                         }
                     }]
                 }),
-
-                /*   use: ExtractTextPlugin.extract({
-                       fallback: "style-loader",
-                       use:  {
-                           loader : 'css-loader',
-                           options: {
-                               module        : true,
-                               localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
-                           },
-                       },
-                   }),*/
-                /*  use    : [
+                 /* use    : [
                       'style-loader',
                       {
                           loader : 'css-loader',
@@ -78,10 +93,10 @@ module.exports = {
                           },
                       },
                   ],*/
-                exclude: [
-                    path.resolve(path.join(__dirname, '..'), 'node_modules/'),
+             /*   exclude: [
+                    // path.resolve(path.join(__dirname, '..'), 'node_modules/'),
                     // path.resolve(path.join(__dirname, '..'), 'src/css/'),
-                ],
+                ],*/
             },
             /* {
                  test   : /\.css$/,
@@ -110,6 +125,7 @@ module.exports = {
                          options: {
                              limit: 10000,
                              name : 'static/img/[name]_[hash:8].[ext]',
+                             // localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
                           /*   publicPath:'/',
                              outputPath:"images"*/
                          },

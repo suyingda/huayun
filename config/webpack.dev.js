@@ -20,6 +20,7 @@ module.exports = merge(common, {
                 removeComments: true,  //移除HTML中的注释
                 collapseWhitespace: true  //删除空白符与换行符
             },
+            // chunksSortMode: 'none'
         }), //创建html打包后
         new CleanWebpackPlugin([path.join(__dirname, '..','/dist')],{ allowExternal: true}),// delete dist,
         // new BaseHrefWebpackPlugin({baseHref: '/'}),

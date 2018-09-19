@@ -3,7 +3,7 @@ import arr from './data.js';
 import {request} from './../fetch'
 import {createSelector} from "reselect";
 import {visibleTodosSelector} from './reselect'
-function getVisibleTodos(first1) {
+const getVisibleTodos=(first1)=> {
     let aaa = [];
     first1 && first1.forEach((v) => {
         aaa.push(v + '苏英大');
@@ -29,18 +29,10 @@ const all = {
         first2:(selectors)=>selectors.first2
     },
     selectors: (state) => {
-        /* const fu=  (first1) =>{
-             let aaa=[]
-        first1.forEach((v) => {
-            aaa.push(v + 'update update');
-        });
-        console.log('change!!!')
-        return aaa;
-    }*/
-        XHL_forEach(getVisibleTodos(state.first1))
+     /*   XHL_forEach(getVisibleTodos(state.first1))
         return {
             visibleTodosSelector: visibleTodosSelector(state)
-        }
+        }*/
     },
     actions: {
         as: (v) => (dispatch, getState) => {

@@ -3,5 +3,6 @@
     font-size: 111px;
     width:1000px;
     height:1000px;
-    background: url("./../../static/img/img.jpg");
+    background: url("./../../static/img/img.jpg") no-repeat;
+
 }
