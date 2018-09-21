@@ -3,7 +3,9 @@ import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
 import {path} from './../fetch/'
-
+import { Button } from 'antd';
+console.log(Button,)
+/*import 'antd/lib/button/style'; // 或者 antd/lib/button/style/css 加载 css 文件*/
 import PropTypes from 'prop-types';
 class Left extends Component {
     constructor(arg) {
@@ -36,9 +38,9 @@ class Left extends Component {
     }
 
     render() {
-        console.log(this,'就来看待世界法律考多少分')
         return (
             <div>
+                <Button type="primary">Primary</Button>
                 <div
                     style={{
                         width: "200px",

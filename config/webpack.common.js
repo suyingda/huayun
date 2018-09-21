@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BaseHrefWebpackPlugin} = require('base-href-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
 const pathName = path.join(__dirname, '..');
 module.exports = {
     entry: {
@@ -24,7 +28,6 @@ module.exports = {
             chunks: 'all'
         }
     },
-
     module: {
         /**
          * 安装babel-loader  babel-core babel-preset-react
@@ -32,7 +35,7 @@ module.exports = {
          */
         rules: [
             {
-                test: /\.js$/,
+                test: /(\.js|\.jsx)$/,
                 use: [
                     {
                         // loader: 'babel-loader',
@@ -41,36 +44,63 @@ module.exports = {
                           presets: ["react", "env"],
                           plugins: ["transform-object-rest-spread"] // ...展开符号插件安装
                         } */
+
                     },
+
                 ],
                 exclude: [path.resolve(path.join(__dirname, '..'), 'node_modules/')],
             },
-
-
-         /*   {
-                test: /-m\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: true,
-                                localIdentName: '[path][name]-[local]-[hash:base64:5]'
-                            }
+            /*   {
+                   test: /-m\.css$/,
+                   use: ExtractTextPlugin.extract({
+                       fallback: "style-loader",
+                       use: [
+                           {
+                               loader: 'css-loader',
+                               options: {
+                                   modules: true,
+                                   localIdentName: '[path][name]-[local]-[hash:base64:5]'
+                               }
+                           }
+                       ]
+                   })
+               },
+               {
+                   test: /^((?!(-m)).)*\.css$/,
+                   use: ExtractTextPlugin.extract({
+                       fallback: 'style-loader',
+                       use: 'css-loader'
+                   })
+               },
+   */
+           /* {//ES6、JSX处理
+                test:/(\.jsx)$/,
+                exclude: /node_modules/,
+                loader:'babel-loader',
+                query:
+                    {
+                        presets:["env", "react"],
+                        plugins: [
+                            [
+                                "import",
+                                {libraryName: "antd", style: 'css'}
+                            ] //antd按需加载
+                        ]
+                    },
+            },*/
+          /*  {//antd样式处理
+                test:/\.css$/,
+                exclude:/src/,
+                use:[
+                    { loader: "style-loader",},
+                    {
+                        loader: "css-loader",
+                        options:{
+                            importLoaders:1
                         }
-                    ]
-                })
-            },
-            {
-                test: /^((?!(-m)).)*\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
-            },
-*/
-
+                    }
+                ]
+            },*/
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
@@ -79,59 +109,109 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName: '[path]-[name]-[local]-[hash:base64:6]'
+                            localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
+                        }
+
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {           // 如果没有options这个选项将会报错 No PostCSS Config found
+                            plugins: (loader) => [
+                                require('postcss-import')({root: loader.resourcePath}),
+                                require('autoprefixer')(), //CSS浏览器兼容
+                                require('cssnano')()  //压缩css
+                            ]
                         }
                     }]
                 }),
-                 /* use    : [
-                      'style-loader',
-                      {
-                          loader : 'css-loader',
-                          options: {
-                              module        : false,
-                              localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
-                          },
-                      },
-                  ],*/
-             /*   exclude: [
-                    // path.resolve(path.join(__dirname, '..'), 'node_modules/'),
+                exclude: [
+                    path.resolve(path.join(__dirname, '..'), 'node_modules/')
                     // path.resolve(path.join(__dirname, '..'), 'src/css/'),
-                ],*/
+                ],
             },
-            /* {
-                 test   : /\.css$/,
-                 use    : ['style-loader', 'css-loader'],
-                 include: [
-                     path.resolve(path.join(__dirname, '..'), 'node_modules/'),
-                     // path.resolve(path.join(__dirname, '..'), 'src/css/'),
+            {
+                test: /\.(less)$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true, localIdentName: '[path]-[name]-[local]-[hash:base64:6]', importLoaders: 1
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {           // 如果没有options这个选项将会报错 No PostCSS Config found
+                                plugins: (loader) => [
+                                    require('postcss-import')({root: loader.resourcePath}),
+                                    require('autoprefixer')(), //CSS浏览器兼容
+                                    require('cssnano')()  //压缩css
+                                ]
+                            }
+                        }]
+                }),
+                /*  use: [
+                      'style-loader',
+                      { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
+                      {
+                          loader: 'postcss-loader',
+                          options: {           // 如果没有options这个选项将会报错 No PostCSS Config found
+                              plugins: (loader) => [
+                                  require('postcss-import')({ root: loader.resourcePath }),
+                                  require('autoprefixer')(), //CSS浏览器兼容
+                                  require('cssnano')()  //压缩css
+                              ]
+                          }
+                      }
+                  ]*/
+            },
 
-                 ],
-             },*/
-           /* {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            },*/
-           /* {
-                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
-            },*/
-             {
-                 test: /\.(jpg|png|gif|jpeg|svg)$/,
-                 use : [
-                     {
-                         loader : 'file-loader',
-                         options: {
-                             limit: 10000,
-                             name : 'static/img/[name]_[hash:8].[ext]',
-                             // localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
-                          /*   publicPath:'/',
-                             outputPath:"images"*/
+            /*  {
+                  test: /\.less$/,
+                  use: ['style-loader',
+                      {
+                          loader: 'css-loader',
+                          options: {
+                              module: true,
+                              // localIdentName: '[name]-[local]-[hash:base64:6]'
+                          }
+                      },
+                      'less-loader'
+                  ],
+                  exclude: [
+                      // path.resolve(path.join(__dirname, '..'), 'node_modules/')
+                      // path.resolve(__dirname, 'src/common')
+                  ]
+              },*/
+            /*     {
+                     test: /\.less$/,
+                     use: ['style-loader',
+                         {
+                             loader: 'css-loader',
+                             options: {
+                                 module: true,
+                                 localIdentName: '[name]-[local]-[hash:base64:6]'
+                             }
                          },
-                     },
-                 ],
-             },
+                         'less-loader'
+                     ]
+
+                 },*/
+            {
+                test: /\.(jpg|png|gif|jpeg|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            limit: 10000,
+                            name: 'static/img/[name]_[hash:8].[ext]',
+                            // localIdentName: '[path]-[name]-[local]-[hash:base64:6]',
+                            /*   publicPath:'/',
+                               outputPath:"images"*/
+                        },
+                    },
+                ],
+            },
         ]
     },
 };

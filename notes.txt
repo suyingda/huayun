@@ -18,8 +18,6 @@ http://172.253.32.131:9589/ibp  test
 
 
 
-component: MajorFinancialInformation, 复制 #952  IPO初步尽职调查报告 财务会计信息   IPOIsExpectedToExplainThePlan
-
 http://code.cmschina.com.cn/
 
 

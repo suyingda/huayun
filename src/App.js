@@ -6,7 +6,13 @@ import right from "./add";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
+// 由于 antd 组件的默认文案是英文，所以需要修改为中文
+import { LocaleProvider, DatePicker, message } from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
 
+moment.locale('zh-cn');
 
 // import Styles from './css/cs-m.css';
 
@@ -75,8 +81,11 @@ class App extends Component {
 
         // console.log(this,'修改')
         return (
+            <LocaleProvider locale={zhCN}>
             <BrowserRouter>
                 <div >
+
+
                     <ChildOne/>
 
                     {/*<h1 >{this.props.pub[0]?this.props.pub[0].footer:''}</h1>*/}
@@ -105,8 +114,10 @@ class App extends Component {
                         {routes.map((route, i) => <RouteWithSubRoutes key={i} excat={route.excat}   {...route} />)}
                     </Switch>
                     {/*<RouteModule routes={this.props}/>*/}
+
                 </div>
             </BrowserRouter>
+            </LocaleProvider>
         );
     }
 }

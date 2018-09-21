@@ -7,14 +7,16 @@ import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import { RouteWithSubRoutes } from "./../router";
 import RouteModule from './../Rt'
 import {connect} from "react-redux";
-import {visibleTodosSelector}  from '../module/reselect'
+import {visibleTodosSelector}  from '../module/reselect';
+import st from './csscss/less.less';
+console.log(st,'演示')
 class Footer extends Component {
 componentDidMount(){
 
 }
     render() {
-        return (<div>
-            <h1 onClick={()=>{
+        return (<div  >
+            <h1  className={st.cart} onClick={()=>{
                 this.props.onTodoClick('苏英大');
                 console.log(this.props)
             }}>footer</h1>

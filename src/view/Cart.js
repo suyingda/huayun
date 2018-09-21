@@ -9,7 +9,8 @@ import {request} from './../fetch'
 import PropTypes from 'prop-types';
 import PUB from './../module/pub'
 import ChildTwo from "../context/two";
-import styles from './csscss/cart.css'
+import styles from './csscss/css.css';
+
 class Cart extends Component {
     /*    constructor(props, _this) {
             super(props);
@@ -55,7 +56,8 @@ class Cart extends Component {
         return (
 
             <div>
-                <div className={styles.header}>Cart</div>
+
+                {/*<div className={styles.header}>Cart</div>*/}
                 子组件一
                 <p>{this.context.value}</p>
                 <input onChange={this.handleChange} />

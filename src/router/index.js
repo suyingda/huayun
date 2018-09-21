@@ -109,7 +109,7 @@ function getCookie(c_name)
 
 const routerGo = (t, path, value,_target=undefined) => {
     if(_target){
-        return window.open(t.state.matchPath + "/" + path + "/" + Base64.encode(JSON.stringify(value)),'_target')
+        return window.open(t.state.matchPath + "/" + path + "/" + Base64.encode(JSON.stringify(value)),_target)
     }else{
         return t.props.history.push(t.state.matchPath + "/" + path + "/" + Base64.encode(JSON.stringify(value)))
     }
@@ -128,7 +128,7 @@ export const RouteWithSubRoutes = route =>{
             path={route.matchpath!==undefined?route.matchpath+route.path:route.path}
             exact={route.exact}
             // render={props =>  <route.component {...props} routes={route.children}/> }
-            render={props => !getCookie('suyingda')?<route.component {...props}  routerGo={routerGo} routerGet={routerGet} routes={route.children}/>:<Redirect to="/sandwiches"/>}
+            render={props =>!getCookie('suyingda')?<route.component {...props}  routerGo={routerGo} routerGet={routerGet} routes={route.children}/>:<Redirect to="/sandwiches"/>}
 
         />
     </div>

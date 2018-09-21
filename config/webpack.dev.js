@@ -38,7 +38,6 @@ module.exports = merge(common, {
               }
           })*/
     ],
-
     devServer: {
         // contentBase: path.join(__dirname, "dist"),
         // compress: true,
@@ -49,10 +48,6 @@ module.exports = merge(common, {
            },*/
         proxy: {
             "/project/*":  Proxy.target,
-                // target: 'http://172.254.68.140:8081',
-                // target: 'http://172.253.32.131:9150/',
-                // target: 'http://172.253.32.131:9150',
-                //  target: 'http://172.253.32.131:9402/',
                 // changeOrigin: true
             // },
             "/admin/*": {

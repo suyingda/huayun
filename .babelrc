@@ -7,6 +7,7 @@
   "plugins": [
     "transform-object-rest-spread",
     "transform-runtime",
-    ["transform-class-properties", { "spec": true }]
+    ["transform-class-properties", { "spec": true }],
+    ["import", { "libraryName": "antd", "libraryDirectory": "es","style":"true"}]
   ]
 }

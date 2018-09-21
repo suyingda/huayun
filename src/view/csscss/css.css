@@ -1,0 +1,8 @@
+.header{
+     font-size:111px;
+     color:red;
+     background: #ffb7b0;
+     width:1000px;
+     height:1000px;
+     background: url("./../../../static/img/img.jpg") no-repeat;
+ }

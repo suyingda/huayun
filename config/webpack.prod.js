@@ -23,7 +23,11 @@ module.exports = merge(common, {
         }), //创建html打包后
         new CleanWebpackPlugin([path.join(__dirname, '..', '/dist')], {allowExternal: true}),// delete dist,
         // new BaseHrefWebpackPlugin({baseHref: '/'}),
-        new ExtractTextPlugin("css/index.css") //默认其实目录问打包后的入口文件路径，所以需要..
+        new ExtractTextPlugin({ //默认其实目录问打包后的入口文件路径，所以需要..
+            filename:'css/index.css',
+            disable:false,
+            allChunks:true
+        })
       /*  new UglifyJSPlugin({
             uglifyOptions: {
                 ecma: 8,
