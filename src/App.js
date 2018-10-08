@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+// import '/node_modules/antd/lib/button/style'; // 或者 antd/lib/button/style/css 加载 css 文件
 
 import {RouteWithSubRoutes, routes, RouteConfigExample} from "./router";
 import left from "./home";
@@ -6,13 +7,15 @@ import right from "./add";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
+ // import  './css/css.less';
+ // console.log(ad,'xxx')
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
-import { LocaleProvider, DatePicker, message } from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+// import { LocaleProvider, DatePicker, message } from 'antd';
+/*import zhCN from 'antd/lib/locale-provider/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
-moment.locale('zh-cn');
+moment.locale('zh-cn');*/
 
 // import Styles from './css/cs-m.css';
 
@@ -81,7 +84,7 @@ class App extends Component {
 
         // console.log(this,'修改')
         return (
-            <LocaleProvider locale={zhCN}>
+
             <BrowserRouter>
                 <div >
 
@@ -100,7 +103,7 @@ class App extends Component {
                         {/*<div className={Styles.aaa}>13213312</div>*/}
                         {/*<div className={aaa}>13213312</div>*/}
                         <ul>
-                            <li>
+                            <li >
                                 <Link to="/left">left</Link>
                             </li>
                             <li>
@@ -117,7 +120,7 @@ class App extends Component {
 
                 </div>
             </BrowserRouter>
-            </LocaleProvider>
+
         );
     }
 }

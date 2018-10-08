@@ -5,9 +5,10 @@
     "stage-1"
   ],
   "plugins": [
+    ["import", { "libraryName": "antd", "libraryDirectory": "es","style":"css"}],
     "transform-object-rest-spread",
     "transform-runtime",
-    ["transform-class-properties", { "spec": true }],
-    ["import", { "libraryName": "antd", "libraryDirectory": "es","style":"true"}]
+    ["transform-class-properties", { "spec": true }]
+
   ]
 }

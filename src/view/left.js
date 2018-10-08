@@ -3,10 +3,12 @@ import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {RouteWithSubRoutes, routes} from "./../router";
 import RouteModule from './../Rt'
 import {path} from './../fetch/'
-import { Button } from 'antd';
-console.log(Button,)
-/*import 'antd/lib/button/style'; // 或者 antd/lib/button/style/css 加载 css 文件*/
+// import Button from 'antd/lib/button';
+// import 'antd/lib/button/style';
+ import { Button,Input } from 'antd';
+
 import PropTypes from 'prop-types';
+
 class Left extends Component {
     constructor(arg) {
         super(arg);
@@ -18,6 +20,7 @@ class Left extends Component {
     componentDidMount() {/*
         path.user.registerPost()
         path.user.test2(1, 15, "0")*/
+
     }
 
     add() {
@@ -33,14 +36,18 @@ class Left extends Component {
                   console.log(str,'left')*/
         // let path = this.context.routers1(this.state.matchPath, 'cart', data)
         // let path = `${this.state.matchPath}/cart/${GG(data)}`;console.log(path)
-     // this.props.history.push(this.props.routerGo(this.state.matchPath, 'cart', data));
-        this.props.routerGo(this, 'cart', data,'_blank')
+        // this.props.history.push(this.props.routerGo(this.state.matchPath, 'cart', data));
+        this.props.routerGo(this, 'cart', data, '_blank')
     }
 
     render() {
         return (
             <div>
-                <Button type="primary">Primary</Button>
+
+
+                <Button type="primary">Button</Button>
+                <Input/>
+
                 <div
                     style={{
                         width: "200px",
@@ -57,9 +64,10 @@ class Left extends Component {
 
                         </li>
                         {/*<Link to={this.state.matchPath + '/Cart'}>Cart </Link>*/}
-                        <div onClick={()=>{
+                        <div onClick={() => {
                             this.props.routerGo(this, 'cart', {})
-                        }}>Cart</div>
+                        }}>Cart
+                        </div>
                         <li onClick={this.add.bind(this)}>Cart111111111111111111
                             {/*<Link to={path}>Cart{path}</Link>*/}
                         </li>
@@ -75,6 +83,7 @@ class Left extends Component {
         );
     }
 }
+
 Left.contextTypes = {
     changeValue: PropTypes.func,
     value: PropTypes.string,

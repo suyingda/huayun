@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react'
 export default class ChildOne extends React.Component {
 
-    handleChange = (e) => {
+   /* handleChange = (e) => {
         const { changeValue } = this.context
         changeValue(e.target.value)
-    }
+    }*/
 
     render() {
         return (

@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "antd": "^3.10.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
@@ -30,7 +31,6 @@
     "prod": "webpack --config ./config/webpack.prod.js"
   },
   "devDependencies": {
-    "antd": "^3.9.2",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-import": "^1.9.1",

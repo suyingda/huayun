@@ -128,6 +128,19 @@ module.exports = {
                     // path.resolve(path.join(__dirname, '..'), 'src/css/'),
                 ],
             },
+            {//antd样式处理
+                test:/\.(less|css)/,
+                exclude:/src/,
+                use:[
+                    { loader: "style-loader",},
+                    {
+                        loader: "css-loader",
+                        options:{
+                            importLoaders:1
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.(less)$/,
                 use: ExtractTextPlugin.extract({
