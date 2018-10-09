@@ -1,14 +1,14 @@
 import React, {Component} from "react";
-// import '/node_modules/antd/lib/button/style'; // 或者 antd/lib/button/style/css 加载 css 文件
-
 import {RouteWithSubRoutes, routes, RouteConfigExample} from "./router";
 import left from "./home";
 import right from "./add";
 import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
- // import  './css/css.less';
- // console.log(ad,'xxx')
+import s from './css/css.css';
+
+console.log(s, 'xxx')
+// console.log(ad,'xxx')
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 // import { LocaleProvider, DatePicker, message } from 'antd';
 /*import zhCN from 'antd/lib/locale-provider/zh_CN';
@@ -29,16 +29,16 @@ class App extends Component {
            super(arg);
        }*/
 
-   /* routers1 = (t, path, value) => {
-        // console.log(path,value,'gg函数')
-        let b = new Base64();
-        return t + "/" + path + "/" + b.encode(JSON.stringify(value))
-    }
-    routers2 = (value) => {
-        let b = new Base64();
-        return b.decode(value)
-    }
-*/
+    /* routers1 = (t, path, value) => {
+         // console.log(path,value,'gg函数')
+         let b = new Base64();
+         return t + "/" + path + "/" + b.encode(JSON.stringify(value))
+     }
+     routers2 = (value) => {
+         let b = new Base64();
+         return b.decode(value)
+     }
+ */
     componentDidMount() {
         window.callback = () => _this.callback()
         // this.props.a()
@@ -73,11 +73,10 @@ class App extends Component {
         return {
             value: this.state.value,
             changeValue: this.changeValue,
-           /* routers1: this.routers1,
-            routers2: this.routers2*/
+            /* routers1: this.routers1,
+             routers2: this.routers2*/
         }
     }
-
 
 
     render() {
@@ -86,7 +85,7 @@ class App extends Component {
         return (
 
             <BrowserRouter>
-                <div >
+                <div className={s.sss}>
 
 
                     <ChildOne/>
@@ -96,14 +95,14 @@ class App extends Component {
                         console.log(this.props.pub[0].footer)
                     }}>首页</h1>*/}
                     <nav>
-                        <svg style={{width:'100px',height:'100px',color:'red'}}   aria-hidden="true">
+                        <svg style={{width: '100px', height: '100px', color: 'red'}} aria-hidden="true">
                             <use xlinkHref="#icon-bianji"/>
                         </svg>
 
                         {/*<div className={Styles.aaa}>13213312</div>*/}
                         {/*<div className={aaa}>13213312</div>*/}
                         <ul>
-                            <li >
+                            <li>
                                 <Link to="/left">left</Link>
                             </li>
                             <li>

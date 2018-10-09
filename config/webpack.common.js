@@ -28,6 +28,15 @@ module.exports = {
             chunks: 'all'
         }
     },
+    performance: {
+        hints: "warning", // 枚举
+        maxAssetSize: 11300000, // 整数类型（以字节为单位）
+        maxEntrypointSize: 11500000, // 整数类型（以字节为单位）
+        assetFilter: function (assetFilename) {
+// 提供资源文件名的断言函数
+            return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
+        }
+    },
     module: {
         /**
          * 安装babel-loader  babel-core babel-preset-react
@@ -73,34 +82,34 @@ module.exports = {
                    })
                },
    */
-           /* {//ES6、JSX处理
-                test:/(\.jsx)$/,
-                exclude: /node_modules/,
-                loader:'babel-loader',
-                query:
-                    {
-                        presets:["env", "react"],
-                        plugins: [
-                            [
-                                "import",
-                                {libraryName: "antd", style: 'css'}
-                            ] //antd按需加载
-                        ]
-                    },
-            },*/
-          /*  {//antd样式处理
-                test:/\.css$/,
-                exclude:/src/,
-                use:[
-                    { loader: "style-loader",},
-                    {
-                        loader: "css-loader",
-                        options:{
-                            importLoaders:1
-                        }
-                    }
-                ]
-            },*/
+            /* {//ES6、JSX处理
+                 test:/(\.jsx)$/,
+                 exclude: /node_modules/,
+                 loader:'babel-loader',
+                 query:
+                     {
+                         presets:["env", "react"],
+                         plugins: [
+                             [
+                                 "import",
+                                 {libraryName: "antd", style: 'css'}
+                             ] //antd按需加载
+                         ]
+                     },
+             },*/
+            /*  {//antd样式处理
+                  test:/\.css$/,
+                  exclude:/src/,
+                  use:[
+                      { loader: "style-loader",},
+                      {
+                          loader: "css-loader",
+                          options:{
+                              importLoaders:1
+                          }
+                      }
+                  ]
+              },*/
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
@@ -129,14 +138,14 @@ module.exports = {
                 ],
             },
             {//antd样式处理
-                test:/\.(less|css)/,
-                exclude:/src/,
-                use:[
-                    { loader: "style-loader",},
+                test: /\.(less|css)/,
+                exclude: /src/,
+                use: [
+                    {loader: "style-loader",},
                     {
                         loader: "css-loader",
-                        options:{
-                            importLoaders:1
+                        options: {
+                            importLoaders: 1
                         }
                     }
                 ]

@@ -6,8 +6,10 @@ import {createStore, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import {Provider} from "react-redux";
 import reducers from "./module/reducers";
-import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
+import {Link, BrowserRouter, Route, Switch} from "react-router-dom";
+
 const store = createStore(reducers, applyMiddleware(thunk));
+import ErrorBoundary from './Error'
 // const store =createStore(reducers)
 /* console.log(store.getState());
 store.dispatch({
@@ -25,13 +27,15 @@ if (module.hot) {
 
 ReactDOM.render(
     <Provider store={store}>
+        <ErrorBoundary>
             <App/>
+        </ErrorBoundary>
     </Provider>,
     document.getElementById("root")
 );
- if (process.env.NODE_ENV !== 'production'){
-       console.log('Looks like we are in development mode!');
-   }else{
-     console.log('Looks like we are in prod mode!');
- }
+if (process.env.NODE_ENV !== 'production') {
+    console.log('Looks like we are in development mode!');
+} else {
+    console.log('Looks like we are in prod mode!');
+}
 
