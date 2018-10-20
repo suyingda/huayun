@@ -16,10 +16,74 @@ const proxy = require('http-proxy-middleware');//引入代理中间件
 const app = express();
 const path = require('path');
 var documentRoot = './dist';
+const proxyTargetFile = path.join(__dirname, '.', 'proxy-target.js');
+fs.watch(proxyTargetFile, {
+    persistent: true, // 设为false时，不会阻塞进程。
+    recursive: false
+}, function(event, filename) {
+    if (event === 'change') {
+        // proxyConfig.target = '1111';
+    }
+});
+
 //需要访问的文件的存放目录
-const html=()=>{
-    return 12321
+//  引入fs文件系统模板
+var fs = require('fs')
+//   创建工程文件
+var projectData = {
+    //   工程名
+    name: 'projectName',
+    // 工程文件数组
+    fileData: [{
+        name: 'js',
+        type: 'dir'
+    }, {
+        name: 'css',
+        type: 'dir'
+    }, {
+        name: 'images',
+        type: 'dir'
+    }, {
+        name: 'fonts',
+        type: 'dir'
+    }, {
+        name: 'index.html',
+        type: 'file',
+        //   默认写入文件内容
+        content: '<!DOCTYPE html> \n<html lang="en">\n<head> \n\t<meta charset="UTF-8">\n\t<title>Title</title>\n</head>\n<body>\n</body>\n</html> '
+    }]
 }
+// 判断工程文件是否存在
+if (!projectData) {
+    //判断工程文件
+    if (projectData.name) {
+        //  如果存在创建工程文件
+        fs.mkdirSync(projectData.name)
+        //   获取工程文件所有子文件数组
+        var fileData = projectData.fileData
+        //　判断工程文件数组是否存在　且是否是个数组
+        if (fileData && fileData.forEach) {
+            //遍历工程文件数组
+            fileData.forEach((item) => {
+                var content = item.content || ''
+                var path = projectData.name + "/" + item.name
+                switch (item.type) {
+                    case 'dir':
+                        //　创建文件夹
+                        fs.mkdirSync(path)
+                        break
+                    case 'file':
+                        //　创建文件
+                        fs.writeFileSync(path, content)
+                        break
+                    default :
+                        break
+                }
+            })
+        }
+    }
+}
+
 /*app.get('*', function (req, res) {
     res.render({html});
 });*/

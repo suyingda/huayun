@@ -82,34 +82,6 @@ module.exports = {
                    })
                },
    */
-            /* {//ES6、JSX处理
-                 test:/(\.jsx)$/,
-                 exclude: /node_modules/,
-                 loader:'babel-loader',
-                 query:
-                     {
-                         presets:["env", "react"],
-                         plugins: [
-                             [
-                                 "import",
-                                 {libraryName: "antd", style: 'css'}
-                             ] //antd按需加载
-                         ]
-                     },
-             },*/
-            /*  {//antd样式处理
-                  test:/\.css$/,
-                  exclude:/src/,
-                  use:[
-                      { loader: "style-loader",},
-                      {
-                          loader: "css-loader",
-                          options:{
-                              importLoaders:1
-                          }
-                      }
-                  ]
-              },*/
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({

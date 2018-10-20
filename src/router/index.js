@@ -21,13 +21,14 @@ import test2 from './../view/test2'
 // const Footer = (location, cb) => {require.ensure([], require => {cb(null, require('./../view/footer').default)},'Footer')}
 
 
-const Sandwiches = () => <h2>Sandwiches</h2>;
+ 
 const f1 = () => <h2>f1</h2>;
 const Not = () => <h2>Not</h2>;
 
 // const Footer     = asyncComponent(() => import('./../view/Footer'));
 const Cart     = asyncComponent(() => import('./../view/Cart'));
 const Footer     = asyncComponent(() => import('./../view/Footer'));
+ const SanDwiches     = asyncComponent(() => import('./../view/SanDwiches'));
 
 
 export const routes = [
@@ -42,7 +43,7 @@ export const routes = [
     },
     {
         path: "/sandwiches",
-        component: Sandwiches
+        component: SanDwiches
     },
 
     {

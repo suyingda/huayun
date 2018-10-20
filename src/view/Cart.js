@@ -18,9 +18,9 @@ class Cart extends Component {
         }*/
     componentWillMount() {
         // this.props.as();
-        /*  request('/project/projectApi/searchById',["afc24d3e-6667-45f2-9b42-07c86280d58a"]).then((v)=>{
+            request('/project/projectApi/searchById',["3dc5373c-169f-4d9d-84b8-e2a318b65c62"]).then((v)=>{
               console.log(v,'就肯定是激发了肯定撒就分厘卡电视机发了')
-          });*/
+          });
         /*  path.user.registerPost(["PROJ_OBSERVE_AND_IMPOSE_TIME_POINT_TYPE", ""]).then(()=>{
               console.log('successful');
               alert(1)
