@@ -71,231 +71,449 @@
     #parent{
         margin:10px;
     }
+    #test{
+        width:100px;
+        height:100px;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+    }
+    .angle-div{
+        width:10px;
+        height:10px;
+        background: rgb(0, 255, 191);
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+    }
+    img{
+         display: block;
+        border:1px solid red;
+    }
+   .jz{
+         position:absolute;
+         background:white;
+         top:50%;
+      
+          transform: translate(0,-50%);
+     
+   }
+   .a{
+       color:red;
+   }
+   .b{
+       color:blue;
+   }
+   #y{
+       width:20px;
+       height:20px;
+       background: red;
+       border-radius: 50%;
+       position: absolute;
+       left:10px;
+       top:10px;
+   }
 </style>
-    <div id="in" >
+    <!--   <div style="
+    height:100px; 
+    width:100px; 
+    background: red;
+    position: relative; 
+       
+        ">
+        <div class="jz">
+            123211
+        </div>
+    </div> -->
+    <!-- <img class="lazy" src="https://dummyimage.com/600x400/00ffff/000&text=图" width="600" height="400" /> -->
+    <div id="y">
 
     </div>
+    输入小写字母：
+    <br />
+    猜猜：<input onchange="a(event)" />
 
-    <div id="parent"> 
-        　　<div id="child1" class="child">child1</div>
-        　　<div id="child2" class="child">child2</div>
-        　　<div id="child3" class="child">child3</div>
-        </div>
-    <!--     <ul>
-        <a>1</a>
-        <a>1</a>
-        <a>1</a>
-    </ul>
- -->
-
-    <!-- 加载静态JS资源 -->
     <script type="text/javascript">
-        document.getElementById("in").addEventListener("click",function(e){
-                // alert("parent事件被触发，"+this.id);
-                console.log(e.target.innerHTML)
-            })
-           /*  document.getElementById("child").addEventListener("click",function(e){
-                alert("child事件被触发，"+this.id)
-            },true) */
-     
-        window.onload = function () {
+      
 
-            for (var i = 0; i < 10; i++) {
-                var _div = document.createElement('div');
-                _div.innerHTML = i;
-                document.getElementById('in').appendChild(_div);
+         
+
+        console.log('--------------------------------')
+        function recurFib(n) {
+            if (n < 2) {
+                return n;
+            } else {
+                //                    document.write("第"+(n-1)+"次计算&nbsp;n-1="+(n-1)+recurFib(n-1)+'&nbsp;&nbsp;&nbsp;');
+                //                    document.write("n-2="+(n-2)+recurFib(n-2)+"<br>");
+                return recurFib(n - 1) + recurFib(n - 2)
+            }
+        }
+        console.log(recurFib(4))
+
+        console.time('start1')
+        function dynFib(n) {
+            let val = [0, 1];
+            for (let i = 2; i <= n; ++i) {
+                val[i] = val[i - 1] + val[i - 2];
+            }
+
+            return val
+        }
+        console.log(dynFib(10))
+        console.log(dynFib(15))
+        console.timeEnd('start1')
+
+
+        console.time('start2')
+        // end 多少数以内  1、1、2、3、5 和 8，
+        function fibonacci(end) {
+
+            var num1 = 1;
+            var num2 = 1;
+            var num3;
+            document.write("<br/>");
+            document.write(num1 + "<br/>");
+            document.write(num2 + "<br/>");
+
+            for (var i = 2; i <= end; i++) {
+                num3 = num1 + num2;
+                num1 = num2;
+                num2 = num3;
+
+                if (num3 > end) {
+                    break;
+                }
+                document.write(num3 + '....' + i + "<br/>");
             }
         }
 
-        //this丢失现象
-        /*   document.addEventListener('DOMContentLoaded', function () {
-              var divs = document.getElementsByTagName('a');
-              console.log(divs, 'divsdivsdivsdivs');
-              for (var i = 0; i < divs.length; i++) {
-                      divs[i].onclick = function () {
-                         (function(i){
-                          return function(){
-                              console.log(i);
-                          }
-                         })(i)
-                      }
-              };
-          }, false); */
 
-        console.log('--------------------------------------1')
+        fibonacci(20000000);
+        console.timeEnd('start2')
+        /* function BST() {
+            this.root = null;
+            this.insert = insert;
+            this.inOrder = inOrder;
+        }
+        function Node(data, left, right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+            this.show = show;
+        }
+
+        // 中序遍历
+        function inOrder(node) {
+            if (!(node == null)) {
+                inOrder(node.left);
+                console.log(node);
+                inOrder(node.right);
+            }
+        }
+
+        function show() {
+            return this.data;
+        }
+        function insert(data) {
+            var n = new Node(data, null, null);
+            if (this.root == null) {
+                this.root = n;
+            } else {
+                var current = this.root;
+                var parent;
+                while (current) {
+                    parent = current;
+                    if (data < current.data) {
+                        current = current.left;
+                        if (current == null) {
+                            parent.left = n;
+                            break;
+                        }
+                    } else {
+                        current = current.right;
+                        if (current == null) {
+                            parent.right = n;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        var nums = new BST();
+        nums.insert(100);
+        nums.insert(10);
+        nums.insert(8);
+        nums.insert(61);
+        nums.insert(7);
+        nums.insert(9);
+        nums.insert(1000);
+        nums.insert(666);
+        nums.insert(222);
 
 
-        /*    var ar = [
-               1, 2, 3, 4, 4, 6, 7, 8, 9,
-               1, 2, 3, 4, 5, 6, 7, 8, 9,
-               1, 2, 3, 4, 5, 6, 7, 8, 9,
-               1, 11, 3, 4, 5, 6, 7, 8, 11,
-               1, 2, 3, 4, 5, 6, 7, 8, 9,
-               1, 2, 3, 4, 5, 6, 7, 8, 9,
-               1, 2, 3, 4, 5, 6, 7, 8, 9,
-               1, 2, 3, 4, 4, 6, 7, 8, 9
-   
-           ]
-   
-   
-           for (var i = 0; i < ar.length - 1; i++) {
-               var _div = document.createElement('div');
-   
-               if (ar[i] === 5) {
-                   _div.setAttribute('class', '_div1')
-                   document.getElementById('in').appendChild(_div);
-   
-               } else if (ar[i] === 11) {
-                   _div.setAttribute('class', '_div11')
-                   document.getElementById('in').appendChild(_div);
-               } else {
-                   _div.setAttribute('class', '_div2')
-                   document.getElementById('in').appendChild(_div);
-               }
-           } */
+        document.write(JSON.stringify(nums.root))
+        console.log(nums.root, '原始打印')
+        inOrder(nums.root);
+        console.log('====');
 
-        console.log('-----------------------------------------')
+        console.log(nums.root, '最后打印') */
+        // preOrder(nums.root);
+        /*   var person = {};
+          var temp = [];
+          Object.defineProperty(person, 'name', {
+              get: function () {
+                  var _name = temp['name'] || '默认姓名';
+                  console.log('获取person的姓名：' + _name);
+                  return _name;
+              },
+              set: function (newVal) {
+                  temp['name'] = newVal;
+                  console.log('为person设置新的姓名：' + newVal);
+              }
+  
+          });
+          function a(e) {
+              person.name = e.target.value
+          }
+  
+   */
 
-        // 构造函数
-        function People(name, sex) {
+
+
+
+        /*   var tz = document.getElementById('y');
+          var isDown = false;
+          var x = 0;
+          var y = 0;
+          var T = 0;
+          var L = 0;
+          tz.onmousedown = function (e) {
+              x = e.clientX;
+              y = e.clientY;
+              T = tz.offsetLeft;
+              L = tz.offsetTop;
+              isDown = true;
+              console.log(T, L)
+          }
+          window.onmousemove = function (e) {
+              if (!isDown) {
+                  return
+              }
+              //计算移动后的左偏移量和顶部的偏移量
+              tz.style.left = (e.clientX - (x - T)) + 'px';
+              tz.style.top = (e.clientY - (y - L)) + 'px';
+  
+          }
+          tz.onmouseup = function () {
+              console.log(1)
+              isDown = false;
+          }
+   */
+        console.log('---------------------------')
+        /*      var a = { n: 1 }
+         var b = a;   //b:{n:1}
+         console.log(a)
+       a = a.x = { n: 2 }
+   
+           console.log(a.x);
+           console.log(b.x)
+           var a = 6;
+           setTimeout(function () {
+               console.log(window, a);`
+               a = 666;
+           }, 1000);
+           a = 66; */
+        console.log('-------------------------')
+        /* function Animal() {
+            this.species = "动物";
+
+        }
+        function Cat(name, color) {
             this.name = name;
-            this.sex = sex;
-            this.eat = function () {
-                console.log(this.name + ' eat')
+            this.color = color;
+        }
+        Cat.prototype = new Animal();
+        // Cat.prototype.constructor = Cat;
+        var cat1 = new Cat("大毛", "黄色"); */
+        // console.log(Cat.prototype.constructor == Animal); //true
+        // console.log(cat1); // 动物
+        /*  var array = [1, 23, 34, 435, 3, 4543, 23333,-1];
+         for (var i = 0; i < array.length - 1; i++) {
+             for (var j = i + 1; j < array.length; j++) {
+                 if (array[i] > array[j]) {
+                     var tem;
+                     tem = array[i]
+                     array[i] = array[j]
+                     array[j] = tem;
+                 }
+             }
+         }
+         console.log(array)
+         function ss() {
+             console.log(2)
+         }
+         function debounce(fn) {
+             var td;
+             return function () {
+                 console.log(1)
+                 clearTimeout(td)
+                 td = setTimeout(fn, 250)
+             }
+         }
+         var aaa = debounce(ss) */
+        /*   function debounce(fn, wait) {
+            var td;
+            return function () {
+                clearTimeout(td);
+                td = setTimeout(fn, wait);
             }
         }
+        var myFunc = debounce(function () {
+            ss()
+            //繁重、耗性能的操作
+        }, 250); */
 
-        function newPeople(name, sex) {
-            // 创建空对象
-            var obj = {}
-            // 指定__proto__ 属性
-            obj.__proto__ = People.prototype;
-            // 指定构造函数
-            obj.constructor = People;
-            // this指针更正
-            People.call(obj, name, sex);
-            // 返回对象
-            return obj;
-        }
+        // window.addEventListener('resize', aaa);
+        /*   function Person(name, age) {
+              if (this instanceof Person) {
+                  this.name = name;
+                  this.age = age;
+              } else {
+                  return new Person(name, age);
+              }
+          }
+          var S = Person("sss", 23)
+          console.log(S.name) */
+
+        console.log('--------------------------------------------------')
+        /*   document.getElementById("in").addEventListener("click", function (e) {
+              // alert("parent事件被触发，"+this.id);
+              console.log(e.target.innerHTML)
+          }) */
+        /*    document.getElementById("child").addEventListener("click", function (e) {
+               alert("child事件被触发，" + this.id)
+           }, true) */
+        /*    function fun(n, o) {
+             console.log(n, '输出n');
+             console.log(o, '输出o');
+             return {
+                 fun: function (m) {
+                     console.log(m, '输出m', 'n:', n, 'o:', o)
+                     console.log('---------------------------------');
+                     return fun(m, n);
+                 }
+             };
+         }
+ 
+       var a = fun(0);  //undefined
+         a.fun(1);
+         a.fun(2);
+         a.fun(3);  //undefined,?,?,?
+        var b = fun(0).fun(1).fun(2).fun(3);//undefined,?,?,? */
+        /*    var c = fun(0).fun(1);
+         c.fun(2);
+         c.fun(3);//undefined,?,?,? */
+        /*   const sleep = (timeountMS) => new Promise((resolve) => {
+              setTimeout(resolve, timeountMS);
+          });
+  
+          (async () => { // 声明即执行的 async 函数表达式
+              for (var i = 0; i < 5; i++) {
+                  await sleep(1000);
+                  console.log(new Date, i);
+              }
+  
+              await sleep(1000);
+              console.log(new Date, i);
+          })(); */
+        /*      const tasks = []; // 这里存放异步操作的 Promise
+             const output = (i) => new Promise((resolve, reject) => {
+                 setTimeout(() => {
+                     console.log(new Date, i);
+                     resolve();
+                 }, 1000 * i);
+             });
+     
+             // 生成全部的异步操作
+             for (var i = 0; i < 5; i++) {
+                 tasks.push(output(i));
+             }
+     
+             // 异步操作完成之后，输出最后的 i
+             Promise.all(tasks).then((a) => {
+                setTimeout(() => {
+                      console.log(new Date, i);
+                  }, 1000);  
+             }); */
+        /* 
+              for (let i = 0; i < 5; i++) {
+                  (function(i){
+                      setTimeout(function () {
+                      console.log(new Date, i);
+                  }, 1000*i);
+                  })(i)
+              
+              }
+      
+              console.log(new Date, i); */
+        /*      for (var i = 0; i <5; i++) {
+                 (function(i){
+                 setTimeout(function () {
+                         console.log(new Date, i);  
+                 }, 1000*i);
+             })(i)
+             }
+     
+             console.log(new Date, i); */
+
+        /*  function add(name, age, xb) {
+             this.name = name;
+             this.age = age;
+             this.xb = xb;
+         }
+ 
+         function foo2(a, b, c) {
+            add.apply(this, [a, b, c]);
+            console.log(this.name,this.age,this.xb,this)
+         }
+ 
+         foo2('苏英大', 25, '男'); */
+        console.log('-----------------------------------------');
+
+        // 默认class是lazyload
+        // let images = document.querySelectorAll(".lazy");
+
+        var imgSrc = new Image()
+        imgSrc.src = 'https://dummyimage.com/600x400/00ffff/000&text=图';
+        document.body.appendChild = imgSrc;
+        window.addEventListener("load", function (event) {
+            // let timeout = setTimeout(function() { // 延迟5秒加载
+            //     lazyload();
+            // }, 5000);
+            // lazyload(images);
 
 
-        var p1 = new People('kevin', 'male')
-        var p2 = newPeople('jenny', 'female')
-        console.log(p1)
-        p1.eat()
-        console.log(p2)
-        p2.eat()
-        console.log('-----------------------------------------')
-        //混合构造函数混合方式(构造函数配合原型)
-        function createPerson(name, qq) { //构造函数加属性
-            this.qq = qq;
-            this.name = name
-        }
-        createPerson.prototype.showName = function () {//原型加方法
-            console.log('my name =' + this.name)
-        }
-        createPerson.prototype.showQQ = function () {
-            console.log('my qq =' + this.qq)
-        }
-        var obj = new createPerson('Mr Lan', '1023032120');
-        var obj2 = new createPerson('Mr Li', '1326532785');
-        //obj.showName() //还可以继续用不影响使用
-        //obj.showQQ()
-        console.log(obj.showName() == obj2.showName())//true
+        })
+        console.log('------------- ---')
 
-        console.log('----------------------------------')
-        function testClass() {
-            var testArray1 = [];
-            var testArray2 = [];
-            this.resetArray = function () {
-                for (var i = 0; i < 99999; i++) {
-                    testArray1.push(i);
-                    testArray2.push(i + 99999);
-                }
-            }
-            this.applyTest = function () {
-                var startTime = 0,
-                    endTime = 0;
-                console.log('开始合并的时间是:' + (startTime = new Date().getTime()));
-                var aa = Array.prototype.push.apply(testArray1, testArray2);
-                console.log(aa);
-                console.log('合并完成的时间是:' + (endTime = new Date().getTime()));
-                console.log('合并数组所用的时间是:' + (endTime - startTime));
-            }
-            this.concatTest = function () {
-                var startTime = 0,
-                    endTime = 0;
-                console.log('开始合并的时间是:' + (startTime = new Date().getTime()));
-                var aa = testArray1.concat(testArray2);
-                console.log(aa.length);
-                console.log('合并完成的时间是:' + (endTime = new Date().getTime()));
-                console.log('合并数组所用的时间是:' + (endTime - startTime));
-            }
-        }
-        var apply = new testClass();
 
-        apply.resetArray();
-        apply.applyTest();
-        var concat = new testClass();
-        concat.resetArray();
-        concat.concatTest();
+        /* var lis=document.getElementById('test').getElementsByTagName('li'); console.log(lis, 111111111111111) for
+        (var i=0; i < 3; i++) { lis[i].index=i; lis[i].onclick=function () { alert(this.index); }; } console.log(lis,
+        22222222222222) */ console.log('=====================================')
+       /*  document.getElementById("in").addEventListener("click", function (e) {
+            // alert("parent事件被触发，"+this.id);
+            console.log(e.target.innerHTML)
+        }) */
+        /* document.getElementById("child").addEventListener("click",function(e){
+        alert("child事件被触发，"+this.id)
+        },true) */
 
-        console.log('----------------------------------')
-        // class 关键字，ES6新特性
-        class ClassCar {
-            drive() {
-                console.log('Vroom!');
-            }
-        }
-        const car1 = new ClassCar();
-        console.log(car1.drive());
-        // 构造函数
-        function ConstructorCar() { }
-        ConstructorCar.prototype.drive = function () {
-            console.log('Vroom!1');
-        };
-        const car2 = new ConstructorCar();
-        console.log(car2.drive(), 'xxx');
-        // 工厂函数
-        const proto = {
-            drive() {
-                console.log('Vroom!2222222');
-            }
-        };
-        function factoryCar() {
-            return Object.create(proto);
-        }
-        const car3 = factoryCar();
-        console.log(car3.drive());
-        console.log('-----------------------------------')
-        var ar = [9999, 10, 9, 1, 2, -111, 34];
-        //var ar = [1,2 10  9999 100000];
 
-        var max = 0;
-        var min = 0;
-        for (var i = 0; i < ar.length - 1; i++) {
-            for (var j = i + 1; j < ar.length; j++) {
-                // console.log(i,'xx',j,ar.length)
-                if (ar[i] > ar[j]) {
-                    var tem = "";
-                    tem = ar[i]
-                    ar[i] = ar[j];
-                    ar[j] = tem;
-                }
-                min = Math.min.apply(Math, ar)
-                max = tem;
 
-            }
-        }
-        console.log(ar, "<br/>", 'max:', max, 'min:', min)
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log("DOM 挂载时间: ", Date.now() - timerStart);
-            // 性能日志上报
-        });
-        window.addEventListener('load', function () {
-            console.log("所有资源加载完成时间: ", Date.now() - timerStart);
-            // 性能日志上报
-        });
     </script>
 </body>
 

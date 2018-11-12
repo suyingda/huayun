@@ -26,63 +26,9 @@ fs.watch(proxyTargetFile, {
     }
 });
 
-//需要访问的文件的存放目录
-//  引入fs文件系统模板
-var fs = require('fs')
-//   创建工程文件
-var projectData = {
-    //   工程名
-    name: 'projectName',
-    // 工程文件数组
-    fileData: [{
-        name: 'js',
-        type: 'dir'
-    }, {
-        name: 'css',
-        type: 'dir'
-    }, {
-        name: 'images',
-        type: 'dir'
-    }, {
-        name: 'fonts',
-        type: 'dir'
-    }, {
-        name: 'index.html',
-        type: 'file',
-        //   默认写入文件内容
-        content: '<!DOCTYPE html> \n<html lang="en">\n<head> \n\t<meta charset="UTF-8">\n\t<title>Title</title>\n</head>\n<body>\n</body>\n</html> '
-    }]
-}
-// 判断工程文件是否存在
-if (!projectData) {
-    //判断工程文件
-    if (projectData.name) {
-        //  如果存在创建工程文件
-        fs.mkdirSync(projectData.name)
-        //   获取工程文件所有子文件数组
-        var fileData = projectData.fileData
-        //　判断工程文件数组是否存在　且是否是个数组
-        if (fileData && fileData.forEach) {
-            //遍历工程文件数组
-            fileData.forEach((item) => {
-                var content = item.content || ''
-                var path = projectData.name + "/" + item.name
-                switch (item.type) {
-                    case 'dir':
-                        //　创建文件夹
-                        fs.mkdirSync(path)
-                        break
-                    case 'file':
-                        //　创建文件
-                        fs.writeFileSync(path, content)
-                        break
-                    default :
-                        break
-                }
-            })
-        }
-    }
-}
+ 
+
+
 
 /*app.get('*', function (req, res) {
     res.render({html});
@@ -140,5 +86,44 @@ var server = http.createServer(function (req, res) {
     });
 
 }).listen(8001);
+
+
+
+// #!/usr/bin/env node
+var WebSocketServer = require('websocket').server;
+var http = require('http');
+ 
+
+var wsServer = new WebSocketServer({
+    httpServer: server,
+    autoAcceptConnections: false
+});
+
+function originIsAllowed(origin) {
+  // put logic here to detect whether the specified origin is allowed.
+  return true;
+}
+wsServer.on('request', function(request) { 
+    if (!originIsAllowed(request.origin)) {
+      request.reject();
+    //   console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+      return;
+    }
+    var connection = request.accept('echo-protocol', request.origin);
+    // console.log((new Date()) + ' Connection accepted.');
+    connection.on('message', function(message) { 
+        if (message.type === 'utf8') {
+            // console.log('Received Message: ' + message.utf8Data);
+            connection.sendUTF(message.utf8Data+'servire');
+        }
+        else if (message.type === 'binary') {
+            // console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
+            connection.sendBytes(message.binaryData);
+        }
+    });
+    connection.on('close', function(reasonCode, description) {
+        // console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    });
+});
 
 console.log('start server successful');
